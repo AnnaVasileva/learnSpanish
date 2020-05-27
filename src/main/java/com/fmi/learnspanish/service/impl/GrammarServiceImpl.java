@@ -7,11 +7,14 @@ import com.fmi.learnspanish.repository.GrammarLevelRepository;
 import com.fmi.learnspanish.repository.LessonRepository;
 import com.fmi.learnspanish.repository.UserRepository;
 import com.fmi.learnspanish.service.GrammarService;
+import com.fmi.learnspanish.service.SessionService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
+
+import javax.servlet.http.HttpSession;
 
 @Service
 public class GrammarServiceImpl implements GrammarService {
@@ -23,6 +26,9 @@ public class GrammarServiceImpl implements GrammarService {
 
   @Autowired
   private GrammarLevelRepository grammarLevelRepository;
+
+  @Autowired
+  private SessionService sessionService;
 
   @Autowired
   private UserRepository userRepository;
@@ -38,8 +44,8 @@ public class GrammarServiceImpl implements GrammarService {
   }
 
   @Override
-  public int grammarUp(String email) {
-    User user = userRepository.findByEmail(email);
+  public void grammarUp(HttpSession session) {
+    User user = userRepository.findByEmail((String) session.getAttribute("email"));
 
     int nextLessonNumber = user.getGrammarLevel().getLevel() + 1;
     Lesson nextLesson = lessonRepository.findByLessonNumber(nextLessonNumber);
@@ -50,7 +56,7 @@ public class GrammarServiceImpl implements GrammarService {
     }
 
     userRepository.saveAndFlush(user);
-    return user.getGrammarLevel().getLevel();
+    sessionService.setSessionAttributes(session, user);
   }
 
 }

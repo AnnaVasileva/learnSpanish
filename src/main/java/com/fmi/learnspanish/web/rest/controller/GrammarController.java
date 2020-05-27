@@ -28,8 +28,7 @@ public class GrammarController {
 
   @PostMapping("/grammarUp")
   public ModelAndView levelUp(HttpSession session) {
-    int newLevel = grammarService.grammarUp((String) session.getAttribute("email"));
-    session.setAttribute("grammarLevel", newLevel);
+    grammarService.grammarUp(session);
     return new ModelAndView("redirect:/learn/grammar/" + session.getAttribute("email"));
   }
 

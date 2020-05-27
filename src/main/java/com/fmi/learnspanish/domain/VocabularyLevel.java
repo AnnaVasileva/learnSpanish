@@ -6,6 +6,7 @@ import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -40,6 +41,6 @@ public class VocabularyLevel {
   @OneToMany(mappedBy = "vocabularyLevel")
   private Collection<User> user;
 
-  @OneToMany(mappedBy = "vocabularyLevel")
+  @OneToMany(fetch = FetchType.EAGER, mappedBy = "vocabularyLevel")
   private Collection<VocabularyCategory> categories;
 }
