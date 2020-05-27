@@ -16,6 +16,7 @@ public class SessionServiceImpl implements SessionService {
 
   @Override
   public void setSessionAttributes(HttpSession session, User user) {
+    session.setAttribute("user", user);
     session.setAttribute("email", user.getEmail());
     session.setAttribute("username", user.getUsername());
     session.setAttribute("grammarLevel", user.getGrammarLevel().getLevel());
