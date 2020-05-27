@@ -1,0 +1,126 @@
+.container {
+  display: flex;
+  height: max-content;
+  width: 75%;
+  padding: 10px;
+  margin-top: 10px;
+  align-content: center;
+  background-color: rgba(0, 0, 0, 0.5) !important;
+  border-radius: 5px;
+}
+
+.sidebar {
+  height: max-content;
+  width: 25%;
+  padding: 20px 5px;
+  z-index: 1;
+  text-align: left;
+  overflow-x: hidden;
+}
+
+.sidebar a {
+  display: flex;
+  padding: 6px 8px 6px 10px;
+  text-decoration: none;
+  font-size: 25px;
+  color: white;
+  border-bottom: 1px solid white;
+  justify-content: space-between;
+}
+
+.sidebar a div {
+  align-self: center;
+}
+
+.sidebar-triangle {
+  display: inline-block;
+  height: 0;
+  width: 0;
+  margin-left: 15px;
+  left: 0px;
+  border: solid white;
+  border-width: 0px;
+  border-top: 6px solid transparent;
+  border-left: 12px solid white;
+  border-bottom: 6px solid transparent;
+}
+
+.sidebar a.active-tab {
+  color: #FFC312;
+  border-bottom: 1px solid #FFC312;
+}
+
+.sidebar a.active-tab .sidebar-triangle {
+  display: inline-block;
+  height: 0;
+  width: 0;
+  margin-left: 15px;
+  border: solid #FFC312;
+  border-width: 0;
+  border-top: 6px solid transparent;
+  border-left: 12px solid #FFC312;
+  border-bottom: 6px solid transparent;
+}
+
+.sidebar a:hover {
+  color: #FFC312;
+  padding-left: 26px;
+  border-bottom: 1px solid #FFC312;
+  transition: all 0.3s;
+}
+
+.sidebar a:hover .sidebar-triangle {
+  display: inline-block;
+  height: 0;
+  width: 0;
+  margin-left: 15px;
+  border: solid #FFC312;
+  border-width: 0;
+  border-top: 6px solid transparent;
+  border-left: 12px solid #FFC312;
+  border-bottom: 6px solid transparent;
+}
+
+/* Style page content */
+
+.main {
+  margin-left: 180px;
+  /* Same as the width of the sidebar */
+  padding: 0px 10px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
+
+@media screen and (max-height: 450px) {
+  .sidebar {
+    padding-top: 15px;
+  }
+  .sidebar a {
+    font-size: 18px;
+  }
+}
+
+.sidebar-content {
+  height: max-content;
+  width: 70%;
+  padding: 15px 10px 15px 15px;
+  margin: 10px 20px 15px 10px;
+  z-index: 2;
+  align-content: center;
+}
+
+.sidebar-content-header {
+  margin-bottom: 10px;
+  color: #FFC312;
+  text-align: center;
+  border-bottom: 1px solid #FFC312;
+}
+
+.sidebar-content-body {
+  height: max-content;
+  padding: 10px;
+  margin: 35px auto 5px;
+  color: white;
+  text-align: justify;
+  
+}

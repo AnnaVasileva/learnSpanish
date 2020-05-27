@@ -1,0 +1,40 @@
+.sidebar-content-header {
+  text-align: left;
+}
+
+.sidebar-content-body {
+  height: max-content;
+  padding: 0px;
+  margin: 15px;
+}
+
+.sidebar-content-body table {
+  width: 50%;
+  color: white;
+  text-align: left;
+}
+
+.header-right a.active-profile {
+    background-color: #FFC312;
+    color: black;
+}
+
+.myTable{
+    width: fit-content;
+}
+
+.tabRow {
+    padding-left: 20px;
+}
+
+.drawTableLine {
+    border-bottom: 1px solid white;    
+}
+
+.italicText {
+    font-style: italic;
+}
+
+
+
+

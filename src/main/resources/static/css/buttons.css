@@ -1,0 +1,21 @@
+.yellow_btn {
+    width: 100px;
+    color: black;
+    background-color: #FFC312;
+}
+
+.yellow_btn:hover {
+    color: black;
+    background-color: white;
+}
+
+.cancel_btn {
+    width: 100px;
+    color: black;
+    background-color: white;
+}
+
+.cancel_btn:hover {
+    color: #FFC312;
+    background-color: white;
+}

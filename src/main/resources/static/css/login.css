@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css?family=Numans');
+html, body {
+    height: 100%;
+}
+
+.container {
+    height: max-content;
+    width: 65%;
+    padding-top: 0px;
+    z-index: 2;
+    text-align: center;
+    align-content: center;
+}
+
+.card {
+    height: fit-content;
+    width: 400px;
+    margin-top: auto;
+    margin-bottom: auto;
+    background-color: rgba(0, 0, 0, 0.5) !important;
+}
+
+.card-header h3 {
+    color: white;
+}
+
+.input-group-prepend span {
+    width: 45px;
+    color: black;
+    background-color: #FFC312;
+    border: 0 !important;
+}
+
+input:focus {
+    outline: 0 0 0 0 !important;
+    box-shadow: 0 0 0 0 !important;
+}
+
+.remember {
+    color: white;
+}
+
+.remember input {
+    height: 20px;
+    width: 20px;
+    margin-right: 5px;
+}
+
+.links {
+    color: white;
+}
+
+.links a {
+    margin-left: 4px;
+}
+
+.signUp_btn {
+    color: #FFC312;
+}
+
+.signUp_btn:hover {
+    color: white;
+    text-decoration: none;
+}
+
+.header-right a.active-login {
+    background-color: #FFC312;
+    color: black;
+}

@@ -1,0 +1,15 @@
+.changeCardBtn {
+  display: inline-block;
+  height: 0;
+  width: 0;
+  margin-right: 20px;
+  margin-left: 0px;
+  left: 0px;
+  color: #FFC312;
+  font-size: 30px;
+  
+}
+
+.changeCardBtn:hover {
+  color: white;
+}

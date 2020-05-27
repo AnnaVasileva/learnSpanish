@@ -1,0 +1,104 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<!DOCTYPE html>
+<html
+        lang="en"
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LearnSpanish</title>
+    <th:block th:include="~{_shared/head}"/>
+    <link rel="stylesheet" type="text/css" href="/css/home.css">
+</head>
+
+<body>
+    <div class="wrapper">
+       <th:block th:include="~{_shared/header}"/>
+
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="info-box">
+                        <div class="info-box-header">
+                            <h3>Grammar</h3>
+                        </div>
+                        <div class="info-box-text">
+                            <p>In section Grammar, in your profile, you can improve your Spanish
+                                grammar.
+                                Each
+                                level is separated into ten different lessons with increasing
+                                difficulty.
+                                This
+                                is the place where you will find understandable explanations with basics
+                                examples.</p>
+                        </div>
+                        <div>
+                            <form>
+                                <div class="form-group">
+                                    <input type="submit" value="Learn More" class="btn float-center learn-more-btn">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="info-box">
+                        <div class="info-box-header">
+                            <h3>Vocabulary</h3>
+                        </div>
+                        <div class="info-box-text">
+                            <p>In section Vocabulary, in your profile, you can improve your Spanish
+                                vocabulary.
+                                Each level is separated into ten different lessons with increasing
+                                difficulty.
+                                This is the place where you will find different types of learning new
+                                words.
+                            </p>
+                        </div>
+                        <div>
+                            <form>
+                                <div class="form-group">
+                                    <input type="submit" value="Learn More" class="btn float-center learn-more-btn">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="info-box">
+                        <div class="info-box-header">
+                            <h3>Practice</h3>
+                        </div>
+                        <div class="info-box-text">
+                            <p>In section Practice, in your profile, you can practice your Spanish
+                                skills. This is the place where you will find different types of games which will
+                                help you to learn and to consolidate your new skills. Let's agree on this - we all
+                                need practice, so don't miss it!</p>
+                        </div>
+                        <div>
+                            <form>
+                                <div class="form-group">
+                                    <input type="submit" value="Learn More" class="btn float-center learn-more-btn">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <th:block th:include="~{_shared/footer}"/>
+
+    </div>
+</body>
+
+</html>

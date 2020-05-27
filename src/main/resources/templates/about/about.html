@@ -1,0 +1,68 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<!DOCTYPE html>
+<html
+        lang="en"
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AboutUs</title>
+    <th:block th:include="~{_shared/head}"/>
+    <link rel="stylesheet" type="text/css" href="/css/about.css">
+</head>
+
+<body>
+    <div class="wrapper">
+       <th:block th:include="~{_shared/header}"/>
+
+        <div class="container">
+            <div class="content">
+                <div class="content-header">
+                    <h2>About Us</h2>
+                </div>
+                <div class="content-title">
+                    <h3>LearnSpanish</h3>
+                </div>
+                <p>LearnSpanish is an educational website for learning Spanish language in its beginner level. This
+                    means
+                    that the platform could help you to be able to interact in a simple way, ask and answer questions
+                    about
+                    yourself, the place you live, the people you know and your possessions. <br> Furthermore, you will
+                    be
+                    able to construct simple statements about your immediate needs or daily issues. You will be able to
+                    introduce yourself and others, ask for and give basic personal information on your residence, your
+                    belongings and persons you know.
+                </p>
+                <div class="content-title">
+                    <h3>Creator</h3>
+                </div>
+                <p>
+                    The creator of LearnSpanish is Anna Vasileva, a student in "St. Kliment Ohridski" University of
+                    Sofia, in
+                    the Faculty of Mathematics and Informatics (FMI). <br> This website was developed in order to finish
+                    her
+                    education for a master's degree. Anna Vasileva's main goal is to introduce a funny way to learn one
+                    of the
+                    most used languages in the world.
+                </p>
+                <div class="content-footer">
+                    <p>Anna Vasileva<br>
+                        fn: 25444<br>
+                        email: a.j.vasileva@gmail.com<br>
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <th:block th:include="~{_shared/footer}"/>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,18 @@
+.container {
+    height: max-content;
+    width: 65%;
+    padding-top: 0px;
+    z-index: 2;
+    text-align: center;
+    color:white;
+    align-content: center;
+}
+
+.info-box {
+    height: fit-content;
+    padding: 50px 5px;
+    margin-top: auto;
+    margin-bottom: 100px;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.5) !important;
+}

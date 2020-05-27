@@ -1,0 +1,48 @@
+.deck-box {
+    height: max-content;
+    padding: 5px;
+    margin: 10px;
+    background-color: #FFC312;
+    border-radius: 5px;
+}
+
+.deck-box-content {
+    height: max-content;
+    padding: 5px;
+    margin: 10px;
+    text-align: center;
+    color: white;
+    text-decoration: none;
+    font-size: 25px;
+}
+
+.deck-box:hover {
+    height: fit-content;
+    margin: 10px;
+    background-color: rgb(248, 172, 9);
+    border-radius: 5px;
+    text-align: center;
+    color: white;
+    text-decoration: none;
+}
+
+.deck-box a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    height: 100%;
+}
+
+.deck-box-content a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    height: 100%;
+}
+
+.deck-box .deck-box-content a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    height: 100%;
+}

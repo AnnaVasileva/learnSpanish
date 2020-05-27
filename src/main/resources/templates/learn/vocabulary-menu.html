@@ -1,0 +1,70 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<!DOCTYPE html>
+<html
+        lang="en"
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vocabulary</title>
+    <th:block th:include="~{_shared/head}"/>
+    <link rel="stylesheet" type="text/css" href="/css/learnActiveTab.css">
+    <link rel="stylesheet" type="text/css" href="/css/sidebar.css">
+    <link rel="stylesheet" type="text/css" href="/css/deckBox.css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <th:block th:include="~{_shared/header-logged}"/>
+
+        <div class="container">
+            <div class="sidebar">
+                <a th:href="@{'/learn/grammar/' + ${session.email}}">Grammar <div class="sidebar-triangle"></div></a>
+                <a class="active-tab" th:href="@{'/learn/vocabulary/' + ${session.email}}">Vocabulary <div class="sidebar-triangle"></div></a>
+                <a th:href="@{'/learn/practice/' + ${session.email}}">Practice <div class="sidebar-triangle"></div></a>
+            </div>
+
+            <div class="sidebar-content">
+                <div class="sidebar-content-header">
+                    <h3>Choose a Deck Type</h3>
+                </div>
+                <div class="sidebar-content-body">
+                    <div class="row align-items-start">
+                        <div class="col">
+                            <div class="deck-box">
+                                <div class="deck-box-content">
+                                    <a tth:href="@{'/vocabulary/pictures-deck-' + ${currentLesson}}">Pictures</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="deck-box">
+                                <div class="deck-box-content">
+                                    <a th:href="@{'/vocabulary/translations-deck-' + ${currentLesson}}">Translations</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="deck-box">
+                                <div class="deck-box-content">
+                                    <a th:href="@{'/vocabulary/antonyms-deck-' + ${currentLesson}}">Antonyms</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <th:block th:include="~{_shared/footer}"/>
+    </div>
+</body>
+
+</html>

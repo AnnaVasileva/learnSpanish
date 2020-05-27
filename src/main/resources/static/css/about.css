@@ -1,0 +1,36 @@
+.container {
+    height: max-content;
+    width: 65%;
+    padding-top: 0px;
+    text-align: center;
+    align-content: center;
+    background-color: rgba(0, 0, 0, 0.5) !important;
+    border-radius: 5px;
+}
+
+.content {
+    padding: 4px;
+    margin: 6px;
+    color: white;
+    text-align: justify;
+}
+
+.content-header {
+    color: white;
+    text-align: center;
+}
+
+.content-title {
+    color: #FFC312;
+    text-align: left;
+}
+
+.content-footer {
+    color: #FFC312;
+    text-align: right;
+}
+
+.header-right a.active-about {
+    background-color: #FFC312;
+    color: black;
+}

@@ -1,0 +1,74 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<!DOCTYPE html>
+<html
+        lang="en"
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:th="http://www.thymeleaf.org"
+>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <th:block th:include="~{_shared/head}"/>
+    <link rel="stylesheet" type="text/css" href="/css/login.css">
+    <link rel="stylesheet" type="text/css" href="/css/buttons.css">
+
+</head>
+
+<body>
+    <div class="wrapper">
+       <th:block th:include="~{_shared/header}"/>
+
+        <div class="container">
+            <div class="d-flex justify-content-center h-100">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Sign In</h3>
+                    </div>
+                    <div class="card-body">
+                        <form th:action="@{/users/login}" method="POST">
+                            <div class="input-group form-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                </div>
+                                <input type="username" class="form-control" id="username" name="username" placeholder="username">
+                            </div>
+
+                            <div class="input-group form-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-key"></i></span>
+                                </div>
+                                <input type="password" class="form-control" id="password" name="password" placeholder="password">
+                            </div>
+
+                            <div class="input-group form-group align-items-center remember">
+                                <div class="input-group-prepend">
+                                    <input type="checkbox" id="rememberMe">
+                                    <label for="rememberMe">Remember Me</label>
+                                </div>
+                            </div>
+
+                            <a href="/"><span class="btn float-left cancel_btn">Cancel</span></a>
+
+                            <button type="submit" class="btn float-right yellow_btn">Login</button>
+                        </form>
+                    </div>
+                    <div class="card-footer">
+                        <div class="d-flex justify-content-center links">
+                            Don't have an account?<a class="signUp_btn" href="/users/register">Sign Up</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <th:block th:include="~{_shared/footer}"/>
+    </div>
+</body>
+
+</html>
