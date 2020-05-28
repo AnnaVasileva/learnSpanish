@@ -20,10 +20,10 @@ public class GrammarController {
   private GrammarService grammarService;
 
   @GetMapping("/grammar-lesson-{number}")
-  public ModelAndView getGrammarLesson(@PathVariable int number, ModelAndView modelAndView) {
-    modelAndView.setViewName("grammar-lessons/grammar-lesson-" + number + ".html");
+  public ModelAndView getGrammarLesson(@PathVariable int number, ModelAndView modelAndView, HttpSession session) {
+    grammarService.setLessonGrammar(session, number);
+    modelAndView.setViewName("grammar-lessons/grammar-lesson-content.html");
     return modelAndView;
-
   }
 
   @PostMapping("/grammarUp")
