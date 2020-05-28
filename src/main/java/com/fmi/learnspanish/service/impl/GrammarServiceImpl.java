@@ -12,14 +12,25 @@ import com.fmi.learnspanish.service.SessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.nio.CharBuffer;
+import java.nio.MappedByteBuffer;
+import java.nio.channels.FileChannel;
+import java.nio.charset.StandardCharsets;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 import javax.servlet.http.HttpSession;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class GrammarServiceImpl implements GrammarService {
 
   private static final int DEFAULT_LESSON = 1;
+  private static final String READ_MODE = "r";
 
   @Autowired
   private LessonRepository lessonRepository;
@@ -41,6 +52,42 @@ public class GrammarServiceImpl implements GrammarService {
     grammarLevel.setLevel(lesson.getLessonNumber());
     grammarLevelRepository.save(grammarLevel);
     return grammarLevel;
+  }
+
+  @Override
+  public void setLessonGrammar(HttpSession session, int lessonNumber) {
+    log.info("Start reading content of lesson " + lessonNumber + "....");
+
+    long startTime = System.nanoTime();
+    Lesson lesson = lessonRepository.findByLessonNumber(lessonNumber);
+    String path = lesson.getContent();
+
+    try {
+      RandomAccessFile lessonContent = new RandomAccessFile(path, READ_MODE);
+      FileChannel inChannel = lessonContent.getChannel();
+      MappedByteBuffer buffer = inChannel.map(FileChannel.MapMode.READ_ONLY, 0, inChannel.size());
+
+      buffer.load();
+
+      CharBuffer charBuffer = StandardCharsets.UTF_8.decode(buffer);
+      String read = charBuffer.toString();
+
+      session.setAttribute("currentLessonNumber", lessonNumber);
+      session.setAttribute("currentLessonTitle", lesson.getTitle());
+      session.setAttribute("currentLessonContent", read);
+
+      buffer.clear();
+      inChannel.close();
+      lessonContent.close();
+
+    } catch (IOException ioe) {
+      log.error("Failed while reading content of lesson " + lessonNumber);
+      ioe.printStackTrace();
+    }
+
+    long endTime = System.nanoTime();
+    long elapsedTimeInMillis = TimeUnit.MILLISECONDS.convert((endTime - startTime), TimeUnit.NANOSECONDS);
+    log.info("Total elapsed time for reading lesson content: " + elapsedTimeInMillis + " ms");
   }
 
   @Override

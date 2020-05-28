@@ -125,7 +125,7 @@
                     </div>    
                     </br>
                         <div class="row justify-content-end">
-                            <div id="doneBtn" class="col align-self-end text-right"  style="display: none;">
+                            <div id="doneBtn" class="col align-self-end text-right" style="display: none;">
                                 <div th:if="${session.vocabularyLevel == currentLesson}">
                                     <div th:if="${#strings.equals(session.translationsStatus, 'IN_PROGRESS')}">
                                             <form th:action="@{/vocabulary/translationsUp}" th:object="${session.email}" method="POST">

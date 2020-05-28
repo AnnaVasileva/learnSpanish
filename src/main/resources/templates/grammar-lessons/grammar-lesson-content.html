@@ -1,0 +1,61 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grammar</title>
+    <th:block th:include="~{_shared/head}" />
+    <link rel="stylesheet" type="text/css" href="/css/sidebar.css">
+    <link rel="stylesheet" type="text/css" href="/css/lessonBox.css">
+    <link rel="stylesheet" type="text/css" href="/css/buttons.css">
+    <link rel="stylesheet" type="text/css" href="/css/grammarLesson.css">
+</head>
+
+<body onload="fixNewLines()">
+
+    <script>
+        function fixNewLines() {
+            var str = document.getElementById("lessonContent").innerHTML; 
+            var res = str.replace( /\n/g, '<br/>' );
+            document.getElementById("lessonContent").innerHTML = res;
+        }
+    </script>
+    
+    <div class="wrapper">
+        <th:block th:include="~{_shared/header-logged}" />
+
+        <div class="container">
+            <div class="sidebar">
+                <a class="active-tab" th:href="@{'/learn/grammar/' + ${session.email}}">Grammar <div
+                        class="sidebar-triangle"></div></a>
+                <a th:href="@{'/learn/vocabulary/' + ${session.email}}">Vocabulary <div class="sidebar-triangle"></div>
+                    </a>
+                <a th:href="@{'/learn/practice/' + ${session.email}}">Practice <div class="sidebar-triangle"></div></a>
+            </div>
+
+            <div class="sidebar-content">
+                <div class="sidebar-content-header">
+                    <h3>[[${session.currentLessonTitle}]] </h3>
+                </div>
+
+                <div id="lessonContent" class="sidebar-content-body scrollable">
+                    [[${session.currentLessonContent}]]                    
+                    <div th:if="${session.grammarLevel == session.currentLessonNumber}">
+                        <th:block th:include="~{_shared/grammarUpBtn}" />
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <th:block th:include="~{_shared/footer}" />
+    </div>
+</body>
+
+</html>

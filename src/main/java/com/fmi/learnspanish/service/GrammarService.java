@@ -8,5 +8,8 @@ public interface GrammarService {
 
   GrammarLevel createGrammarLevel();
 
+  void setLessonGrammar(HttpSession session, int lessonNumber);
+
   void grammarUp(HttpSession session);
+
 }
