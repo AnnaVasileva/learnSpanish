@@ -54,7 +54,6 @@ public class UserServiceImpl implements UserService {
     System.out.printf("name --> %s%n", user.getUsername());
     user.setEmail(registerUserResource.getEmail());
     System.out.printf("getEmail --> %s%n", user.getEmail());
-    // user.setPassword(registerUserResource.getPassword());
     user.setPassword(bCryptPasswordEncoder.encode(registerUserResource.getPassword()));
 
     GrammarLevel grammarLevel = grammarService.createGrammarLevel();

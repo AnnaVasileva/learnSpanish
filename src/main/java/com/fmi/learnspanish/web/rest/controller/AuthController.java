@@ -1,9 +1,6 @@
 package com.fmi.learnspanish.web.rest.controller;
 
-import com.fmi.learnspanish.domain.User;
-import com.fmi.learnspanish.service.AuthService;
 import com.fmi.learnspanish.service.AuthValidationService;
-import com.fmi.learnspanish.service.SessionService;
 import com.fmi.learnspanish.service.UserService;
 import com.fmi.learnspanish.web.rest.resource.RegisterUserResource;
 
@@ -23,12 +20,6 @@ public class AuthController {
   private AuthValidationService authValidationService;
 
   @Autowired
-  private AuthService authService;
-
-  @Autowired
-  private SessionService sessionService;
-
-  @Autowired
   private UserService userService;
 
   @GetMapping("/login")
@@ -45,34 +36,10 @@ public class AuthController {
 
   @PostMapping("/register")
   public ModelAndView register(@ModelAttribute RegisterUserResource model) throws Exception {
-    System.out.println("in register method");
     if (authValidationService.isValid(model)) {
-      User user = userService.createUser(model);
+      userService.createUser(model);
     }
-
-    // authService.register(user);
-
     return new ModelAndView("redirect:/users/login");
   }
 
-  // @PostMapping("/register")
-  // public ModelAndView register(@ModelAttribute RegisterUserResource model) throws Exception {
-  // authValidationService.isValid(model);
-  //
-  // userService.register(model);
-  //
-  // return new ModelAndView("redirect:/users/login");
-  // }
-
-  // @PostMapping("/login")
-  // public ModelAndView login(@ModelAttribute LoginUserResource model, HttpSession session) {
-  // try {
-  // User user = authService.login(model);
-  // sessionService.setSessionAttributes(session, user);
-  // return new ModelAndView("redirect:/home");
-  //
-  // } catch (Exception ex) {
-  // return new ModelAndView("redirect:/users/login");
-  // }
-  // }
 }

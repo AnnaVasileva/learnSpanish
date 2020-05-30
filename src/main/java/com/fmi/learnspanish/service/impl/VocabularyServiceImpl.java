@@ -60,8 +60,6 @@ public class VocabularyServiceImpl implements VocabularyService {
   private void setCategories(VocabularyLevel vocabularyLevel) {
     VocabularyCategory vocabularyCategoryPictures =
         createVocabularyCategory(VocabularyCategoryType.PICTURES, vocabularyLevel);
-    vocabularyCategoryPictures.setStatus(VocabularyStatus.FINISHED);
-    vocabularyCategoryRepository.save(vocabularyCategoryPictures);
 
     VocabularyCategory vocabularyCategoryTranslations =
         createVocabularyCategory(VocabularyCategoryType.TRANSLATIONS, vocabularyLevel);
