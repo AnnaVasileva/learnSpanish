@@ -30,8 +30,8 @@ public class Word {
   @Column(name = "NAME")
   private String name;
 
-  // @Column(name = "picture")
-  // private String picture;
+  @Column(name = "picture")
+  private String picture;
 
   @Column(name = "TRANSLATION")
   private String translation;

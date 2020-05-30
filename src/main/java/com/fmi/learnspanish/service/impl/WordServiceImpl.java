@@ -34,7 +34,7 @@ public class WordServiceImpl implements WordService {
       flashcard.setFront(word.getName());
 
       if (categoryType.equalsIgnoreCase(VocabularyCategoryType.PICTURES.toString())) {
-        // TODO: flashcard.setBack(word.getPicture());
+        flashcard.setBack(word.getPicture());
       } else if (categoryType.equalsIgnoreCase(VocabularyCategoryType.TRANSLATIONS.toString())) {
         flashcard.setBack(word.getTranslation());
       } else if (categoryType.equalsIgnoreCase(VocabularyCategoryType.ANTONYMS.toString())) {
