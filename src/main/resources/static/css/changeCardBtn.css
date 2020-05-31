@@ -13,3 +13,7 @@
 .changeCardBtn:hover {
   color: white;
 }
+
+#prevCardBtn:hover, #nextCardBtn:hover{
+  cursor: pointer;    
+}

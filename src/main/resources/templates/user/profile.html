@@ -21,7 +21,7 @@
 
 <body>
     <div class="wrapper">
-        <th:block th:include="~{_shared/header-logged}"/>
+        <th:block th:include="~{_shared/header}"/>
 
     <div class="container">
       <div class="sidebar-content">
@@ -57,21 +57,21 @@
               <td>Lesson [[${session.vocabularyLevel}]] - [[${session.vocabularyLessonTitle}]]</td>
             </tr>
             <tr>
-              <td class="tabRow">Pictures Deck: </td>
+              <td class="tabRow">Pictures: </td>
               <td th:if="${#strings.equals(session.picturesStatus, 'IN_PROGRESS')}">
                 <div class="italicText">In progress</div>
               </td>
               <td th:unless="${#strings.equals(session.picturesStatus, 'IN_PROGRESS')}">Finished</td>              
             </tr>
             <tr>
-              <td class="tabRow">Translations Deck: </td>
+              <td class="tabRow">Translations: </td>
               <td th:if="${#strings.equals(session.translationsStatus, 'IN_PROGRESS')}">
                 <div class="italicText">In progress</div>
               </td>
               <td th:unless="${#strings.equals(session.translationsStatus, 'IN_PROGRESS')}">Finished</td>  
             </tr>
             <tr class="drawTableLine">
-              <td class="tabRow">Antonyms Deck: </td>
+              <td class="tabRow">Antonyms: </td>
               <td th:if="${#strings.equals(session.antonymsStatus, 'IN_PROGRESS')}">
                 <div class="italicText">In progress</div>
               </td>

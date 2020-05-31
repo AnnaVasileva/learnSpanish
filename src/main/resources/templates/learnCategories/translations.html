@@ -15,6 +15,7 @@
     <link rel="stylesheet" type="text/css" href="/css/sidebar.css">
     <link rel="stylesheet" type="text/css" href="/css/translations.css">
     <link rel="stylesheet" type="text/css" href="/css/changeCardBtn.css">
+    <link rel="stylesheet" type="text/css" href="/css/buttons.css">
 </head>
 <body>
 
@@ -83,7 +84,7 @@
     
     
     <div class="wrapper">
-        <th:block th:include="~{_shared/header-logged}" />
+        <th:block th:include="~{_shared/header}" />
 
         <div class="container">
             <div class="sidebar">
@@ -118,7 +119,7 @@
                         
                         <div class="col align-self-start">
                             <div class="changeCardBtn">
-                                <a id="nextCardBtn" th:onclick="nextFlashcard('[[${deck}]]')">&#9658;</a>
+                                <span id="nextCardBtn" th:onclick="nextFlashcard('[[${deck}]]')">&#9658;</span>
                             </div>
                         </div>
                         
@@ -130,7 +131,7 @@
                                     <div th:if="${#strings.equals(session.translationsStatus, 'IN_PROGRESS')}">
                                             <form th:action="@{/vocabulary/translationsUp}" th:object="${session.email}" method="POST">
                                                 <div class="button-container">
-                                                  <button type="submit" class="btn float-right create_btn yellow_btn">Done</button>
+                                                  <button type="submit" class="temp btn float-right create_btn yellow_btn">Done</button>
                                                 </div>
                                             </form>
                                     </div>

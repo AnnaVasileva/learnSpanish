@@ -26,26 +26,9 @@
     <div sec:authorize="hasAuthority('USER')">
     You are USER
     </div>
-    <th:block th:if="${session.user == null}">
-        user == null
-    </th:block>
-    <th:block th:unless="${session.user == null}">
-        user == [[${session.username}]]
-    </th:block>
-    <th:block th:if="${session.username == null}">
-        username == null
-    </th:block>
-    <th:block th:unless="${session.username == null}">
-        username == [[${session.username}]]
-    </th:block>
-    <th:block th:if="${session.email == null}">
-        email == null
-    </th:block>
-    <th:block th:unless="${session.email == null}">
-        email == [[${session.email}]]
-    </th:block>
+    
     <div class="wrapper">
-       <th:block th:include="~{_shared/header-logged}"/>
+       <th:block th:include="~{_shared/header}"/>
 
         <div class="container">
             <div class="row">
