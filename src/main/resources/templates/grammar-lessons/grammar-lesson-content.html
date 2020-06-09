@@ -11,7 +11,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Grammar</title>
     <th:block th:include="~{_shared/head}" />
+    <link rel="stylesheet" type="text/css" href="/css/learnActiveTab.css">
     <link rel="stylesheet" type="text/css" href="/css/sidebar.css">
+    <link rel="stylesheet" type="text/css" href="/css/activeSidebarOptionGrammar.css">
     <link rel="stylesheet" type="text/css" href="/css/lessonBox.css">
     <link rel="stylesheet" type="text/css" href="/css/buttons.css">
     <link rel="stylesheet" type="text/css" href="/css/grammarLesson.css">
@@ -21,31 +23,25 @@
 
     <script>
         function fixNewLines() {
-            var str = document.getElementById("lessonContent").innerHTML; 
-            var res = str.replace( /\n/g, '<br/>' );
+            var str = document.getElementById("lessonContent").innerHTML;
+            var res = str.replace(/\n/g, '<br/>');
             document.getElementById("lessonContent").innerHTML = res;
         }
     </script>
-    
+
     <div class="wrapper">
-        <th:block th:include="~{_shared/header-logged}" />
+        <th:block th:include="~{_shared/header}" />
 
         <div class="container">
-            <div class="sidebar">
-                <a class="active-tab" th:href="@{'/learn/grammar/' + ${session.email}}">Grammar <div
-                        class="sidebar-triangle"></div></a>
-                <a th:href="@{'/learn/vocabulary/' + ${session.email}}">Vocabulary <div class="sidebar-triangle"></div>
-                    </a>
-                <a th:href="@{'/learn/practice/' + ${session.email}}">Practice <div class="sidebar-triangle"></div></a>
-            </div>
+            <th:block th:include="~{_shared/sidebar}" />
 
             <div class="sidebar-content">
                 <div class="sidebar-content-header">
-                    <h3>[[${session.currentLessonTitle}]] </h3>
+                    <h3>[[${session.currentLessonTitle}]]</h3>
                 </div>
 
                 <div id="lessonContent" class="sidebar-content-body scrollable">
-                    [[${session.currentLessonContent}]]                    
+                    [[${session.currentLessonContent}]]
                     <div th:if="${session.grammarLevel == session.currentLessonNumber}">
                         <th:block th:include="~{_shared/grammarUpBtn}" />
                     </div>

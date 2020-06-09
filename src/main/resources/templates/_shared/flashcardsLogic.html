@@ -1,0 +1,26 @@
+<th:block th:fragment>
+    <div class="row justify-content-end">
+
+        <div class="col align-self-center text-right">
+            <div class="changeCardBtn">
+                <span id="prevCardBtn" style="display: none;" onclick="getPrevCard()">&#9668;</span>
+            </div>
+        </div>
+
+        <div class="col align-self-center">
+            <div id="vocBox" class="vocabulary-box" onclick="flipFlashcard()">
+                <div id="vocBoxContent" class="vocabulary-box-content">
+                    <span id="flashcard">Flashcards go!</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col align-self-center">
+            <div class="changeCardBtn">
+                <span id="nextCardBtn" th:onclick="nextFlashcard('[[${deck}]]')">&#9658;</span>
+            </div>
+        </div>
+
+    </div>
+    </br>
+</th:block>

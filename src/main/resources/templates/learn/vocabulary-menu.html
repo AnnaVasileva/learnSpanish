@@ -4,32 +4,25 @@
 <!------ Include the above in your HEAD tag ---------->
 
 <!DOCTYPE html>
-<html
-        lang="en"
-        xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:th="http://www.thymeleaf.org"
->
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vocabulary</title>
-    <th:block th:include="~{_shared/head}"/>
+    <th:block th:include="~{_shared/head}" />
     <link rel="stylesheet" type="text/css" href="/css/learnActiveTab.css">
     <link rel="stylesheet" type="text/css" href="/css/sidebar.css">
+    <link rel="stylesheet" type="text/css" href="/css/activeSidebarOptionVocabulary.css">
     <link rel="stylesheet" type="text/css" href="/css/deckBox.css">
 </head>
 
 <body>
     <div class="wrapper">
-        <th:block th:include="~{_shared/header-logged}"/>
+        <th:block th:include="~{_shared/header}" />
 
         <div class="container">
-            <div class="sidebar">
-                <a th:href="@{'/learn/grammar/' + ${session.email}}">Grammar <div class="sidebar-triangle"></div></a>
-                <a class="active-tab" th:href="@{'/learn/vocabulary/' + ${session.email}}">Vocabulary <div class="sidebar-triangle"></div></a>
-                <a th:href="@{'/learn/practice/' + ${session.email}}">Practice <div class="sidebar-triangle"></div></a>
-            </div>
+            <th:block th:include="~{_shared/sidebar}" />
 
             <div class="sidebar-content">
                 <div class="sidebar-content-header">
@@ -63,7 +56,7 @@
             </div>
         </div>
 
-        <th:block th:include="~{_shared/footer}"/>
+        <th:block th:include="~{_shared/footer}" />
     </div>
 </body>
 

@@ -13,22 +13,17 @@
     <th:block th:include="~{_shared/head}" />
     <link rel="stylesheet" type="text/css" href="/css/learnActiveTab.css">
     <link rel="stylesheet" type="text/css" href="/css/sidebar.css">
+    <link rel="stylesheet" type="text/css" href="/css/activeSidebarOptionGrammar.css">
     <link rel="stylesheet" type="text/css" href="/css/lessonBox.css">
     <link rel="stylesheet" type="text/css" href="/css/lockedLevel.css">
 </head>
 
 <body>
     <div class="wrapper">
-        <th:block th:include="~{_shared/header-logged}" />
+        <th:block th:include="~{_shared/header}" />
 
         <div class="container">
-            <div class="sidebar">
-                <a class="active-tab" th:href="@{'/learn/grammar/' + ${session.email}}">Grammar <div
-                        class="sidebar-triangle"></div></a>
-                <a th:href="@{'/learn/vocabulary/' + ${session.email}}">Vocabulary <div class="sidebar-triangle"></div>
-                </a>
-                <a th:href="@{'/learn/practice/' + ${session.email}}">Practice <div class="sidebar-triangle"></div></a>
-            </div>
+            <th:block th:include="~{_shared/sidebar}" />
 
             <div class="sidebar-content">
                 <div class="sidebar-content-header">
