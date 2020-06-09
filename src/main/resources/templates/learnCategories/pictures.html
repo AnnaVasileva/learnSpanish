@@ -13,91 +13,19 @@
     <th:block th:include="~{_shared/head}" />
     <link rel="stylesheet" type="text/css" href="/css/learnActiveTab.css">
     <link rel="stylesheet" type="text/css" href="/css/sidebar.css">
-    <link rel="stylesheet" type="text/css" href="/css/translations.css">
+    <link rel="stylesheet" type="text/css" href="/css/activeSidebarOptionVocabulary.css">
+    <link rel="stylesheet" type="text/css" href="/css/vocabularyBox.css">
     <link rel="stylesheet" type="text/css" href="/css/changeCardBtn.css">
     <link rel="stylesheet" type="text/css" href="/css/buttons.css">
+    <script type="text/javascript" src="/js/flashcardMovementPictures.js"></script>
 </head>
+
 <body>
-
-    <script>
-        var deckJson;
-        var cuurentCardIndex = 0;
-        var card;
-        
-        function nextFlashcard(deck) {
-            deckJson = JSON.parse(deck);
-            document.getElementById("nextCardBtn").click = getNextCard(deckJson);
-            if (cuurentCardIndex > 1) {                
-                document.getElementById("prevCardBtn").style.display = 'block';
-            }       
-        }
-        
-        function getNextCard(deck) {
-            if (cuurentCardIndex < deck.length) {
-                document.getElementById("flashcard").innerHTML = deck[cuurentCardIndex].front;
-                card = deck[cuurentCardIndex];
-                cuurentCardIndex += 1;       
-            } else {
-                document.getElementById("flashcard").innerHTML = "Congrats you have finished this deck!";
-                document.getElementById("nextCardBtn").style.display = 'none';
-                document.getElementById("doneBtn").style.display = 'block';
-                cuurentCardIndex = deck.length + 1;   
-                card = null;
-                finishedDeck = true;
-            }
-        };
-        
-        function getPrevCard() {
-            cuurentCardIndex -= 2;
-            document.getElementById("doneBtn").style.display = 'none';
-
-            if (cuurentCardIndex <= 0) {
-                document.getElementById("prevCardBtn").style.display = 'none';
-            }
-
-            document.getElementById("flashcard").innerHTML = deckJson[cuurentCardIndex].front;
-            document.getElementById("nextCardBtn").style.display = 'block';
-            card = deckJson[cuurentCardIndex];
-            cuurentCardIndex += 1;
-            
-        };
-        
-        function flipFlashcard() {
-            if (card != null) {
-                document.getElementById("flashcard").click = flipCard(card);                   
-            }
-        }
-        
-       function flipCard(card) {        
-            var innerCardValue = document.getElementById("flashcard").innerHTML;
-            var frontCardValue = card.front;
-            
-            var backCardValue = new Image();
-            backCardValue.src = card.back;
-           
-            if(innerCardValue == frontCardValue){
-                document.getElementById("flashcard").innerHTML = null;
-                backCardValue.addEventListener("load", function(){
-                document.getElementById("flashcard").appendChild(this);
-                });
-            } else{
-                document.getElementById("flashcard").innerHTML = frontCardValue;
-            }
-        }
-        
-    </script>
-    
-    
     <div class="wrapper">
         <th:block th:include="~{_shared/header}" />
 
         <div class="container">
-            <div class="sidebar">
-                <a th:href="@{'/learn/grammar/' + ${session.email}}">Grammar <div class="sidebar-triangle"></div></a>
-                <a class="active-tab" th:href="@{'/learn/vocabulary/' + ${session.email}}">Vocabulary <div
-                        class="sidebar-triangle"></div></a>
-                <a th:href="@{'/learn/practice/' + ${session.email}}">Practice <div class="sidebar-triangle"></div></a>
-            </div>
+            <th:block th:include="~{_shared/sidebar}" />
 
             <div class="sidebar-content">
                 <div class="sidebar-content-header">
@@ -105,45 +33,21 @@
                     <h5>Click on the card to flip it</h5>
                 </div>
                 <div class="sidebar-content-body">
+                    <th:block th:include="~{_shared/flashcardsLogic}" />
                     <div class="row justify-content-end">
-                    
-                        <div class="col align-self-start text-right">
-                            <div class="changeCardBtn">
-                                <span id="prevCardBtn" style="display: none;" onclick="getPrevCard()">&#9668;</span>
-                            </div>
-                        </div>
-                        
-                        <div class="col align-self-center">
-                            <div class="translation-box">
-                                <div class="translation-box-content">
-                                    <span id="flashcard" onclick="flipFlashcard()">Pictures go!</span>
-                                    <div id="upMyLevel"></div>
+                        <div id="doneBtn" class="col align-self-end text-right" style="display: none;">
+                            <div th:if="${session.vocabularyLevel == currentLesson}">
+                                <div th:if="${#strings.equals(session.picturesStatus, 'IN_PROGRESS')}">
+                                    <form th:action="@{/vocabulary/picturesUp}" th:object="${session.email}" method="POST">
+                                        <div class="button-container">
+                                            <button type="submit" class="btn float-right create_btn yellow_btn">Done</button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
-                        
-                        <div class="col align-self-start">
-                            <div class="changeCardBtn">
-                                <a id="nextCardBtn" th:onclick="nextFlashcard('[[${deck}]]')">&#9658;</a>
-                            </div>
-                        </div>
-                        
-                    </div>    
-                    </br>
-                        <div class="row justify-content-end">
-                            <div id="doneBtn" class="col align-self-end text-right"  style="display: none;">
-                                <div th:if="${session.vocabularyLevel == currentLesson}">
-                                    <div th:if="${#strings.equals(session.picturesStatus, 'IN_PROGRESS')}">
-                                            <form th:action="@{/vocabulary/picturesUp}" th:object="${session.email}" method="POST">
-                                                <div class="button-container">
-                                                  <button type="submit" class="temp btn float-right create_btn yellow_btn">Done</button>
-                                                </div>
-                                            </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
+                    </div>
+
                 </div>
             </div>
         </div>

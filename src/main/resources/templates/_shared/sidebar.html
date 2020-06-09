@@ -1,0 +1,8 @@
+<th:block th:fragment>
+    <div class="sidebar">
+        <a class="inactive active-grammar" th:href="@{'/learn/grammar/' + ${session.email}}">Grammar <div class="sidebar-triangle"></div></a>
+        <a class="inactive active-vocabulary" th:href="@{'/learn/vocabulary/' + ${session.email}}">Vocabulary <div
+                class="sidebar-triangle"></div></a>
+        <a class="inactive active-practice" th:href="@{'/learn/practice/' + ${session.email}}">Practice <div class="sidebar-triangle"></div></a>
+    </div>
+</th:block>
