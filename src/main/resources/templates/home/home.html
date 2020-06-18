@@ -4,31 +4,19 @@
 <!------ Include the above in your HEAD tag ---------->
 
 <!DOCTYPE html>
-<html
-        lang="en"
-        xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:th="http://www.thymeleaf.org"
-        xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
->
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LearnSpanish</title>
-    <th:block th:include="~{_shared/head}"/>
+    <th:block th:include="~{_shared/head}" />
     <link rel="stylesheet" type="text/css" href="/css/home.css">
 </head>
 
 <body>
-    <div sec:authorize="hasAuthority('ADMIN')">
-    You are admin
-    </div>
-    <div sec:authorize="hasAuthority('USER')">
-    You are USER
-    </div>
-    
     <div class="wrapper">
-       <th:block th:include="~{_shared/header}"/>
+        <th:block th:include="~{_shared/header}" />
 
         <div class="container">
             <div class="row">
@@ -38,14 +26,9 @@
                             <h3>Grammar</h3>
                         </div>
                         <div class="info-box-text">
-                            <p>In section Grammar, in your profile, you can improve your Spanish
-                                grammar.
-                                Each
-                                level is separated into ten different lessons with increasing
-                                difficulty.
-                                This
-                                is the place where you will find understandable explanations with basics
-                                examples.</p>
+                            <p>In section Grammar, in your profile, you can improve your Spanish grammar. Each level is separated into ten different lessons with increasing difficulty. This is the place where you will find understandable explanations with
+                                basics examples.
+                            </p>
                         </div>
                         <div>
                             <form>
@@ -63,12 +46,8 @@
                             <h3>Vocabulary</h3>
                         </div>
                         <div class="info-box-text">
-                            <p>In section Vocabulary, in your profile, you can improve your Spanish
-                                vocabulary.
-                                Each level is separated into ten different lessons with increasing
-                                difficulty.
-                                This is the place where you will find different types of learning new
-                                words.
+                            <p>In section Vocabulary, in your profile, you can improve your Spanish vocabulary. Each level is separated into ten different lessons with increasing difficulty. This is the place where you will find different types of learning
+                                new words.
                             </p>
                         </div>
                         <div>
@@ -87,10 +66,8 @@
                             <h3>Practice</h3>
                         </div>
                         <div class="info-box-text">
-                            <p>In section Practice, in your profile, you can practice your Spanish
-                                skills. This is the place where you will find different types of games which will
-                                help you to learn and to consolidate your new skills. Let's agree on this - we all
-                                need practice, so don't miss it!</p>
+                            <p>In section Practice, in your profile, you can practice your Spanish skills. This is the place where you will find different types of games which will help you to learn and to consolidate your new skills. Let's agree on this
+                                - we all need practice, so don't miss it!</p>
                         </div>
                         <div>
                             <form>
@@ -104,7 +81,7 @@
             </div>
         </div>
 
-        <th:block th:include="~{_shared/footer}"/>
+        <th:block th:include="~{_shared/footer}" />
 
     </div>
 </body>

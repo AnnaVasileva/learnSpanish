@@ -1,8 +1,6 @@
 package com.fmi.learnspanish.domain;
 
-import org.hibernate.annotations.GenericGenerator;
-import org.springframework.security.core.userdetails.UserDetails;
-
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -17,75 +15,71 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
+
+import org.hibernate.annotations.GenericGenerator;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name = "USERS")
 @Getter
 @Setter
-@NoArgsConstructor
+//@NoArgsConstructor
 public class User implements UserDetails {
 
-  @Id
-  @GeneratedValue(generator = "uuid2")
-  @GenericGenerator(name = "uuid2", strategy = "uuid2")
-  @Column(length = 36)
-  private String id;
+	@Id
+	@GeneratedValue(generator = "uuid2")
+	@GenericGenerator(name = "uuid2", strategy = "uuid2")
+	@Column(length = 36)
+	private String id;
 
-  @Column(name = "username")
-  private String username;
+	@Column(name = "username")
+	private String username;
 
-  @Column(name = "email")
-  private String email;
+	@Column(name = "email")
+	private String email;
 
-  @Column(name = "password")
-  private String password;
+	@Column(name = "password")
+	private String password;
 
-  @Column(name = "salt")
-  private String salt;
+	@Column(name = "salt")
+	private String salt;
 
-  @OneToOne(cascade = CascadeType.ALL)
-  @JoinColumn(name = "grammar_level_id", referencedColumnName = "ID")
-  private GrammarLevel grammarLevel;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "grammar_level_id", referencedColumnName = "ID")
+	private GrammarLevel grammarLevel;
 
-  @ManyToOne(optional = false)
-  @JoinColumn(name = "vocabulary_level_id", referencedColumnName = "ID")
-  private VocabularyLevel vocabularyLevel;
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "vocabulary_level_id", referencedColumnName = "ID")
+	private VocabularyLevel vocabularyLevel;
 
-  @Column(name = "practice_level")
-  private int practiceLevel = 2;
+	@Column(name = "practice_level")
+	private int practiceLevel = 2;
 
-  @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-  @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "ID"),
-      inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "ID"))
-  private Set<Role> authorities;
+	@Column(name = "is_account_non_expired")
+	private boolean isAccountNonExpired = true;
 
-  @Override
-  @Transient
-  public boolean isAccountNonExpired() {
-    return true;
-  }
+	@Column(name = "is_account_non_locked")
+	private boolean isAccountNonLocked  = true;
 
-  @Override
-  @Transient
-  public boolean isAccountNonLocked() {
-    return true;
-  }
+	@Column(name = "is_credentials_non_expired")
+	private boolean isCredentialsNonExpired  = true;
 
-  @Override
-  @Transient
-  public boolean isCredentialsNonExpired() {
-    return true;
-  }
-
-  @Override
-  @Transient
-  public boolean isEnabled() {
-    return true;
-  }
-
+	@Column(name = "is_enabled")
+	private boolean isEnabled  = true;
+	
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable( 
+	        name = "users_roles", 
+	        joinColumns = @JoinColumn(
+	          name = "user_id", referencedColumnName = "id"), 
+	        inverseJoinColumns = @JoinColumn(
+	          name = "role_id", referencedColumnName = "id")) 
+	private Set<Role> authorities;
+	
+	public User(){
+		authorities = new HashSet<>();
+	}
 }

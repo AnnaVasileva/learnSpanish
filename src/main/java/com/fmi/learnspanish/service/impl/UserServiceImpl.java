@@ -1,12 +1,11 @@
 package com.fmi.learnspanish.service.impl;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -23,7 +22,6 @@ import com.fmi.learnspanish.service.GrammarService;
 import com.fmi.learnspanish.service.UserService;
 import com.fmi.learnspanish.service.VocabularyService;
 import com.fmi.learnspanish.web.rest.resource.RegisterUserResource;
-import com.fmi.learnspanish.web.rest.resource.UserStatisticsResource;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -72,8 +70,10 @@ public class UserServiceImpl implements UserService {
 		Role role = roleRepository.findByAuthority("USER");
 		Set<Role> roles = new HashSet<>();
 		roles.add(role);
+		System.out.printf("roles ---> ", role);
 		user.setAuthorities(roles);
-
+		user.getAuthorities().forEach(auth -> System.out.printf("user aut --> %s%n", auth));
+		
 		System.out.println("successful created user");
 		userRepository.saveAndFlush(user);
 		log.info("User {} was successfully created.", user.getUsername());
@@ -94,25 +94,8 @@ public class UserServiceImpl implements UserService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		User user = userRepository.findByUsername(username);
 
-		// Set<GrantedAuthority> authorities = new HashSet<>();
+		Set<GrantedAuthority> authorities = new HashSet<>(user.getAuthorities());
 		return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
-				user.getAuthorities());
-	}
-
-	@Override
-	public List<UserStatisticsResource> getUsersStatistics() {
-		List<User> users = userRepository.findAll();
-		List<UserStatisticsResource> usersStatisticsList = new ArrayList<>();
-		users.forEach(user -> {
-			UserStatisticsResource userStatisticsResource = new UserStatisticsResource();
-			userStatisticsResource.setUsername(user.getUsername());
-			userStatisticsResource.setGrammarLevel(user.getGrammarLevel().getLesson().getTitle());
-			userStatisticsResource.setVocabularyLevel(user.getVocabularyLevel().getLesson().getTitle());
-			userStatisticsResource.setPracticeLevel(user.getPracticeLevel());
-			
-			usersStatisticsList.add(userStatisticsResource);
-		});
-		
-		return usersStatisticsList;
+				authorities);
 	}
 }
