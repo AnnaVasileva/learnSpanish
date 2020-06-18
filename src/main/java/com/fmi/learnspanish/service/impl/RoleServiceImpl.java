@@ -12,11 +12,11 @@ public class RoleServiceImpl implements RoleService {
 
   @Autowired
   private RoleRepository roleRepository;
-
-  @Override
-  public void seedRolesInDb() {
-    roleRepository.saveAndFlush(new Role("ADMIN"));
-    roleRepository.saveAndFlush(new Role("USER"));
-  }
+//
+//  @Override
+//  public void seedRolesInDb() {
+//    roleRepository.saveAndFlush(new Role("ADMIN"));
+//    roleRepository.saveAndFlush(new Role("USER"));
+//  }
 
 }

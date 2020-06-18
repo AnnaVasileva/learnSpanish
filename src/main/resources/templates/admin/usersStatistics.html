@@ -1,0 +1,37 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistics</title>
+    <th:block th:include="~{_shared/head}" />
+    <link rel="stylesheet" type="text/css" href="/css/sidebar.css">
+    <link rel="stylesheet" type="text/css" href="/css/statisticsTable.css">
+    <script type="text/javascript" src="/js/createStatisticsTable.js"></script>
+</head>
+
+<body th:onload="createStatisticsTable('[[${usersStatistics}]]')">
+    <div class="wrapper">
+        <th:block th:include="~{_shared/header}" />
+
+        <div class="container">
+            <div class="sidebar-content">
+                <div class="sidebar-content-header">
+                    <h3>Users statistics</h3>
+                </div>
+                <div class="sidebar-content-body">
+                    <div id="statisticsTable"></div>
+                </div>
+            </div>
+        </div>
+
+        <th:block th:include="~{_shared/footer}" />
+    </div>
+</body>
+
+</html>

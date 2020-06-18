@@ -1,23 +1,32 @@
 <th:block th:fragment>
-        <div class="header-container">
-            <div class="header">
-                <a class="logo">LearnSpanish</a>
-                <div class="header-right">
-                    <th:block th:if="${session.user == null}">
-                        <a class="inactive active-home" href="/">Home</a>
+    <div class="header-container">
+        <div class="header">
+            <a class="logo">LearnSpanish</a>
+            <div class="header-right">
+                <th:block th:if="${session.user == null}">
+                    <a class="inactive active-home" href="/">Home</a>
+                    <a class="inactive active-about" href="/about">About Us</a>
+                    <a class="inactive active-login" href="/users/login">Sign In</a>
+                </th:block>
+                <th:block th:unless="${session.user == null}">
+                    <th:block th:if="${#strings.equals(session.authorities, '[ADMIN]')}">
+                        <a class="inactive active-home" href="/home">Home</a>
+                        <a class="inactive active-learn" th:href="@{'/learn/grammar/' + ${session.email}}">Learn</a>
+                        <a class="inactive active-profile" th:href="@{'/profile/' + ${session.email}}">[[${session.username}]]</a>
+                        <a class="inactive active-statistics" href="/admin/statistics">Statistics</a></li>
+                        <a class="inactive active-makeAdmin" href="/admin/makeAdmin">Make an admin</a>
                         <a class="inactive active-about" href="/about">About Us</a>
-                        <a class="inactive active-login" href="/users/login">Sign In</a>
+                        <a class="inactive active-signOut" th:href="@{/logout}">Sign Out</a>
                     </th:block>
-                    <th:block th:unless="${session.user == null}">
+                    <th:block th:unless="${#strings.equals(session.authorities, '[ADMIN]')}">
                         <a class="inactive active-home" href="/home">Home</a>
                         <a class="inactive active-learn" th:href="@{'/learn/grammar/' + ${session.email}}">Learn</a>
                         <a class="inactive active-profile" th:href="@{'/profile/' + ${session.email}}">[[${session.username}]]</a>
                         <a class="inactive active-about" href="/about">About Us</a>
                         <a class="inactive active-signOut" th:href="@{/logout}">Sign Out</a>
                     </th:block>
-                </div>
+                </th:block>
             </div>
         </div>
+    </div>
 </th:block>
-
-

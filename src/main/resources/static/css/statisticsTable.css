@@ -1,0 +1,51 @@
+#statisticsTable tbody,
+#statisticsTable thead {
+    display: block;
+}
+
+#statisticsTable tbody {
+    overflow: auto;
+    height: 200px;
+}
+
+#statisticsTable {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#statisticsTable td,
+#statisticsTable th {
+    padding: 8px;
+    width: 160px;
+}
+
+#statisticsTable tr,
+#statisticsTable th {
+    color: white;
+}
+
+#statisticsTable tr:nth-child(even) {
+    background-color: rgba(156, 156, 154, 0.4);
+}
+
+#statisticsTable th {
+    padding-bottom: 10px;
+    text-align: left;
+    font-size: medium;
+    font-weight: bold;
+}
+
+#statisticsTable tbody tr:hover {
+    color: black;
+    background-color: rgba(156, 156, 154, 0.8);
+}
+
+.header-right a.active-statistics {
+    background-color: #FFC312;
+    color: black;
+}
+
+.sidebar-content-header {
+    text-align: left;
+}
