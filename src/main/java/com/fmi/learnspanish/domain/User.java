@@ -20,13 +20,13 @@ import org.hibernate.annotations.GenericGenerator;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name = "USERS")
 @Getter
 @Setter
-//@NoArgsConstructor
 public class User implements UserDetails {
 
 	@Id
