@@ -35,7 +35,8 @@ public class SessionServiceImpl implements SessionService {
       }
     });
 
-    session.setAttribute("practiceLevel", user.getPracticeLevel());
+    session.setAttribute("practiceLevel", user.getPracticeLevel().getLevel());
+    session.setAttribute("practiceLessonTitle", user.getPracticeLevel().getLesson().getTitle());
   }
 
 }

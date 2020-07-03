@@ -12,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.fmi.learnspanish.domain.GrammarLevel;
+import com.fmi.learnspanish.domain.PracticeLevel;
 import com.fmi.learnspanish.domain.Role;
 import com.fmi.learnspanish.domain.User;
 import com.fmi.learnspanish.domain.VocabularyCategory;
@@ -19,6 +20,7 @@ import com.fmi.learnspanish.domain.VocabularyLevel;
 import com.fmi.learnspanish.repository.RoleRepository;
 import com.fmi.learnspanish.repository.UserRepository;
 import com.fmi.learnspanish.service.GrammarService;
+import com.fmi.learnspanish.service.PracticeService;
 import com.fmi.learnspanish.service.UserService;
 import com.fmi.learnspanish.service.VocabularyService;
 import com.fmi.learnspanish.web.rest.resource.RegisterUserResource;
@@ -35,6 +37,9 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private VocabularyService vocabularyService;
 
+	@Autowired
+	private PracticeService practiceService;
+	
 	@Autowired
 	private UserRepository userRepository;
 
@@ -67,6 +72,10 @@ public class UserServiceImpl implements UserService {
 		Collection<VocabularyCategory> cat = user.getVocabularyLevel().getCategories();
 		cat.forEach(c -> System.out.printf("category --> %s%n", c.getId()));
 
+		PracticeLevel practiceLevel = practiceService.createPracticeLevel();
+		user.setPracticeLevel(practiceLevel);
+		System.out.printf("PracticeLevel --> %s%n", user.getPracticeLevel());
+		
 		Role role = roleRepository.findByAuthority("USER");
 		Set<Role> roles = new HashSet<>();
 		roles.add(role);

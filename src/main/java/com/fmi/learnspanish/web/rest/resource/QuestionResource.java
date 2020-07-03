@@ -1,5 +1,7 @@
 package com.fmi.learnspanish.web.rest.resource;
 
+import java.util.Set;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -7,13 +9,11 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class UserStatisticsResource {
+public class QuestionResource {
 
-	private String username;
+	private String text;
 
-	private String grammarLevel;
+	private Set<String> choices;
 
-	private String vocabularyLevel;
-	
-	private String practiceLevel;
+	private String answer;
 }

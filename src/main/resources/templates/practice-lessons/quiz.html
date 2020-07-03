@@ -1,0 +1,58 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice</title>
+    <th:block th:include="~{_shared/head}" />
+    <link rel="stylesheet" type="text/css" href="/css/learnActiveTab.css">
+    <link rel="stylesheet" type="text/css" href="/css/sidebar.css">
+    <link rel="stylesheet" type="text/css" href="/css/activeSidebarOptionPractice.css">
+    <link rel="stylesheet" type="text/css" href="/css/buttons.css">
+    <link rel="stylesheet" type="text/css" href="/css/questions.css">
+    <script type="text/javascript" src="/js/questions.js"></script>
+</head>
+
+<body th:onload="createQuiz('[[${questions}]]', '[[${currentPracticeLessonNumber}]]')">
+
+    <div class="wrapper">
+        <th:block th:include="~{_shared/header}" />
+
+        <div class="container">
+            <th:block th:include="~{_shared/sidebar}" />
+
+            <div class="sidebar-content">
+                <div class="sidebar-content-header">
+                    <h3>Choose correct answer</h3>
+                </div>
+
+                <div id="lessonContent" class="sidebar-content-body">
+                    <p id="question" class="questionContent"></p>
+
+                    <div class="optionBox" id="option0"><span id="choice0"></span></div>
+                    <div class="optionBox" id="option1"><span id="choice1"></span></div>
+                    <div class="optionBox" id="option2"><span id="choice2"></span></div>
+                    <div class="optionBox" id="option3"><span id="choice3"></span></div>
+
+                    <hr style="margin-top: 50px">
+                    <footer>
+                        <p id="progress">Question x of y</p>
+                    </footer>
+
+
+
+                </div>
+            </div>
+        </div>
+
+        <th:block th:include="~{_shared/footer}" />
+    </div>
+</body>
+
+</html>
