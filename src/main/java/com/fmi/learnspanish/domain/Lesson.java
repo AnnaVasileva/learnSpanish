@@ -23,28 +23,31 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Lesson {
 
-  @Id
-  @GeneratedValue(generator = "uuid2")
-  @GenericGenerator(name = "uuid2", strategy = "uuid2")
-  @Column(length = 36)
-  private String id;
+	@Id
+	@GeneratedValue(generator = "uuid2")
+	@GenericGenerator(name = "uuid2", strategy = "uuid2")
+	@Column(length = 36)
+	private String id;
 
-  @Column(name = "LESSON_NUMBER")
-  private int lessonNumber;
+	@Column(name = "LESSON_NUMBER")
+	private int lessonNumber;
 
-  @Column(name = "TITLE")
-  private String title;
+	@Column(name = "TITLE")
+	private String title;
 
-  @Column(name = "CONTENT")
-  private String content;
+	@Column(name = "CONTENT")
+	private String content;
 
-  @OneToMany(mappedBy = "lesson", orphanRemoval = true, cascade = {CascadeType.ALL})
-  private Collection<Word> words;
+	@OneToMany(mappedBy = "lesson", orphanRemoval = true, cascade = { CascadeType.ALL })
+	private Collection<Word> words;
 
-  @OneToMany(mappedBy = "lesson", orphanRemoval = true, cascade = {CascadeType.ALL})
-  private Collection<GrammarLevel> grammarLevel;
+	@OneToMany(mappedBy = "lesson", orphanRemoval = true, cascade = { CascadeType.ALL })
+	private Collection<Question> questions;
 
-  @OneToMany(mappedBy = "lesson", orphanRemoval = true, cascade = {CascadeType.ALL})
-  private Collection<VocabularyLevel> vocabularyLevel;
+	@OneToMany(mappedBy = "lesson", orphanRemoval = true, cascade = { CascadeType.ALL })
+	private Collection<GrammarLevel> grammarLevel;
+
+	@OneToMany(mappedBy = "lesson", orphanRemoval = true, cascade = { CascadeType.ALL })
+	private Collection<VocabularyLevel> vocabularyLevel;
 
 }

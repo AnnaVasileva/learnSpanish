@@ -38,7 +38,7 @@ public class AdminServiceImpl implements AdminService {
 			userStatisticsResource.setUsername(user.getUsername());
 			userStatisticsResource.setGrammarLevel(user.getGrammarLevel().getLesson().getTitle());
 			userStatisticsResource.setVocabularyLevel(user.getVocabularyLevel().getLesson().getTitle());
-			userStatisticsResource.setPracticeLevel(user.getPracticeLevel());
+			userStatisticsResource.setPracticeLevel(user.getPracticeLevel().getLesson().getTitle());
 
 			usersStatisticsList.add(userStatisticsResource);
 		});

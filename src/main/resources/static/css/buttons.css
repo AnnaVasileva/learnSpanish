@@ -19,3 +19,14 @@
     color: #FFC312;
     background-color: white;
 }
+
+#tryAgainButton {
+    color: black;
+    text-decoration: none;
+}
+
+#tryAgainButton:hover {
+    color: black;
+    background-color: white;
+    text-decoration: none;
+}

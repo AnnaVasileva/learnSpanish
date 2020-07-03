@@ -20,7 +20,6 @@ import org.hibernate.annotations.GenericGenerator;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
@@ -55,8 +54,9 @@ public class User implements UserDetails {
 	@JoinColumn(name = "vocabulary_level_id", referencedColumnName = "ID")
 	private VocabularyLevel vocabularyLevel;
 
-	@Column(name = "practice_level")
-	private int practiceLevel = 2;
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "practice_level_id", referencedColumnName = "ID")
+	private PracticeLevel practiceLevel;
 
 	@Column(name = "is_account_non_expired")
 	private boolean isAccountNonExpired = true;

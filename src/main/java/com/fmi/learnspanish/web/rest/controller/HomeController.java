@@ -1,7 +1,5 @@
 package com.fmi.learnspanish.web.rest.controller;
 
-import static org.hamcrest.CoreMatchers.sameInstance;
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
