@@ -1,6 +1,5 @@
 package com.fmi.learnspanish.service.impl;
 
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,7 +14,6 @@ import com.fmi.learnspanish.domain.GrammarLevel;
 import com.fmi.learnspanish.domain.PracticeLevel;
 import com.fmi.learnspanish.domain.Role;
 import com.fmi.learnspanish.domain.User;
-import com.fmi.learnspanish.domain.VocabularyCategory;
 import com.fmi.learnspanish.domain.VocabularyLevel;
 import com.fmi.learnspanish.repository.RoleRepository;
 import com.fmi.learnspanish.repository.UserRepository;
@@ -39,7 +37,7 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private PracticeService practiceService;
-	
+
 	@Autowired
 	private UserRepository userRepository;
 
@@ -54,36 +52,26 @@ public class UserServiceImpl implements UserService {
 		if (registerUserResource == null) {
 			return null;
 		}
-		System.out.println("==========createUser==============");
+
 		User user = new User();
 		user.setUsername(registerUserResource.getUsername());
-		System.out.printf("name --> %s%n", user.getUsername());
 		user.setEmail(registerUserResource.getEmail());
-		System.out.printf("getEmail --> %s%n", user.getEmail());
 		user.setPassword(bCryptPasswordEncoder.encode(registerUserResource.getPassword()));
 
 		GrammarLevel grammarLevel = grammarService.createGrammarLevel();
 		user.setGrammarLevel(grammarLevel);
-		System.out.printf("grammarLevel --> %s%n", user.getGrammarLevel());
 
 		VocabularyLevel vocabularyLevel = vocabularyService.createVocabularyLevel();
 		user.setVocabularyLevel(vocabularyLevel);
-		System.out.printf("vocabularyLevel --> %s%n", user.getVocabularyLevel());
-		Collection<VocabularyCategory> cat = user.getVocabularyLevel().getCategories();
-		cat.forEach(c -> System.out.printf("category --> %s%n", c.getId()));
 
 		PracticeLevel practiceLevel = practiceService.createPracticeLevel();
 		user.setPracticeLevel(practiceLevel);
-		System.out.printf("PracticeLevel --> %s%n", user.getPracticeLevel());
-		
+
 		Role role = roleRepository.findByAuthority("USER");
 		Set<Role> roles = new HashSet<>();
 		roles.add(role);
-		System.out.printf("roles ---> ", role);
 		user.setAuthorities(roles);
-		user.getAuthorities().forEach(auth -> System.out.printf("user aut --> %s%n", auth));
-		
-		System.out.println("successful created user");
+
 		userRepository.saveAndFlush(user);
 		log.info("User {} was successfully created.", user.getUsername());
 		return user;

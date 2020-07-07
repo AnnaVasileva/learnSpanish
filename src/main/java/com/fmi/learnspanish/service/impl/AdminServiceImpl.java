@@ -31,7 +31,7 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public List<UserStatisticsResource> getUsersStatistics() {
-		List<User> users = userRepository.findAll();
+		List<User> users = userRepository.findAllByOrderByUsername();
 		List<UserStatisticsResource> usersStatisticsList = new ArrayList<>();
 		users.forEach(user -> {
 			UserStatisticsResource userStatisticsResource = new UserStatisticsResource();

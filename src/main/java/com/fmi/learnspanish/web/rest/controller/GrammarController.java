@@ -13,15 +13,15 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpSession;
 
 @RestController
-@RequestMapping("/grammar/lesson")
+@RequestMapping("/grammar")
 public class GrammarController {
 
   @Autowired
   private GrammarService grammarService;
 
-  @GetMapping("/grammar-lesson-{number}")
-  public ModelAndView getGrammarLesson(@PathVariable int number, ModelAndView modelAndView, HttpSession session) {
-    grammarService.setLessonGrammar(session, number);
+  @GetMapping("/lesson-{lessonNumber}")
+  public ModelAndView getGrammarLesson(@PathVariable int lessonNumber, ModelAndView modelAndView, HttpSession session) {
+    grammarService.setLessonGrammar(session, lessonNumber);
     modelAndView.setViewName("grammar-lessons/grammar-lesson-content.html");
     return modelAndView;
   }

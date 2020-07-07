@@ -34,52 +34,44 @@ public class User implements UserDetails {
 	@Column(length = 36)
 	private String id;
 
-	@Column(name = "username")
+	@Column(name = "USERNAME")
 	private String username;
 
-	@Column(name = "email")
+	@Column(name = "EMAIL")
 	private String email;
 
-	@Column(name = "password")
+	@Column(name = "PASSWORD")
 	private String password;
 
-	@Column(name = "salt")
-	private String salt;
-
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "grammar_level_id", referencedColumnName = "ID")
+	@JoinColumn(name = "GRAMMAR_LEVEL_ID", referencedColumnName = "ID")
 	private GrammarLevel grammarLevel;
 
 	@ManyToOne(optional = false)
-	@JoinColumn(name = "vocabulary_level_id", referencedColumnName = "ID")
+	@JoinColumn(name = "VOCABULARY_LEVEL_ID", referencedColumnName = "ID")
 	private VocabularyLevel vocabularyLevel;
 
 	@ManyToOne(optional = false)
-	@JoinColumn(name = "practice_level_id", referencedColumnName = "ID")
+	@JoinColumn(name = "PRACTICE_LEVEL_ID", referencedColumnName = "ID")
 	private PracticeLevel practiceLevel;
 
 	@Column(name = "is_account_non_expired")
 	private boolean isAccountNonExpired = true;
 
 	@Column(name = "is_account_non_locked")
-	private boolean isAccountNonLocked  = true;
+	private boolean isAccountNonLocked = true;
 
 	@Column(name = "is_credentials_non_expired")
-	private boolean isCredentialsNonExpired  = true;
+	private boolean isCredentialsNonExpired = true;
 
 	@Column(name = "is_enabled")
-	private boolean isEnabled  = true;
-	
+	private boolean isEnabled = true;
+
 	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable( 
-	        name = "users_roles", 
-	        joinColumns = @JoinColumn(
-	          name = "user_id", referencedColumnName = "id"), 
-	        inverseJoinColumns = @JoinColumn(
-	          name = "role_id", referencedColumnName = "id")) 
+	@JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
 	private Set<Role> authorities;
-	
-	public User(){
+
+	public User() {
 		authorities = new HashSet<>();
 	}
 }
