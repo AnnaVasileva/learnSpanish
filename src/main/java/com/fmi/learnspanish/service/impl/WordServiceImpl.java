@@ -6,7 +6,7 @@ import com.fmi.learnspanish.domain.Word;
 import com.fmi.learnspanish.repository.LessonRepository;
 import com.fmi.learnspanish.repository.WordRepository;
 import com.fmi.learnspanish.service.WordService;
-import com.fmi.learnspanish.web.rest.resource.FlashcardResource;
+import com.fmi.learnspanish.web.resource.FlashcardResource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

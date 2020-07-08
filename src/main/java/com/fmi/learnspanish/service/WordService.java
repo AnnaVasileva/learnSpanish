@@ -1,8 +1,8 @@
 package com.fmi.learnspanish.service;
 
-import com.fmi.learnspanish.web.rest.resource.FlashcardResource;
-
 import java.util.List;
+
+import com.fmi.learnspanish.web.resource.FlashcardResource;
 
 public interface WordService {
 

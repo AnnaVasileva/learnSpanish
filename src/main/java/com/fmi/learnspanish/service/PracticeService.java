@@ -5,7 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import com.fmi.learnspanish.domain.PracticeLevel;
-import com.fmi.learnspanish.web.rest.resource.QuestionResource;
+import com.fmi.learnspanish.web.resource.QuestionResource;
 
 public interface PracticeService {
 

@@ -1,4 +1,4 @@
-package com.fmi.learnspanish.web.rest.resource;
+package com.fmi.learnspanish.web.resource;
 
 import java.util.Set;
 

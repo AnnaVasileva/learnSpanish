@@ -1,22 +1,22 @@
-package com.fmi.learnspanish.web.rest.controller;
-
-import com.fmi.learnspanish.service.VocabularyService;
-import com.fmi.learnspanish.service.WordService;
-import com.fmi.learnspanish.web.rest.resource.FlashcardResource;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
+package com.fmi.learnspanish.web.controller;
 
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-@RestController
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.fmi.learnspanish.service.VocabularyService;
+import com.fmi.learnspanish.service.WordService;
+import com.fmi.learnspanish.web.resource.FlashcardResource;
+
+@Controller
 @RequestMapping("/vocabulary")
 public class VocabularyController {
 

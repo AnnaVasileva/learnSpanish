@@ -1,11 +1,12 @@
 package com.fmi.learnspanish.service.impl;
 
-import com.fmi.learnspanish.repository.UserRepository;
-import com.fmi.learnspanish.service.AuthValidationService;
-import com.fmi.learnspanish.web.rest.resource.RegisterUserResource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.fmi.learnspanish.repository.UserRepository;
+import com.fmi.learnspanish.service.AuthValidationService;
+import com.fmi.learnspanish.web.exeptionhandling.InvalidUserException;
+import com.fmi.learnspanish.web.resource.RegisterUserResource;
 
 @Service
 public class AuthValidationServiceImpl implements AuthValidationService {
@@ -14,10 +15,10 @@ public class AuthValidationServiceImpl implements AuthValidationService {
   private UserRepository userRepository;
 
   @Override
-  public boolean isValid(RegisterUserResource registerUserResource) throws Exception {
+  public boolean isValid(RegisterUserResource registerUserResource) throws InvalidUserException {
     if (!arePasswordsMatching(registerUserResource.getPassword(), registerUserResource.getConfirmPassword())
         || isAccountTaken(registerUserResource.getEmail())) {
-      throw new Exception();
+      throw new InvalidUserException("Invalid user. Please, try again.");
     }
     return true;
   }

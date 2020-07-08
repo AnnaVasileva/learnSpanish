@@ -1,6 +1,7 @@
 package com.fmi.learnspanish.service.impl;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ import com.fmi.learnspanish.service.GrammarService;
 import com.fmi.learnspanish.service.PracticeService;
 import com.fmi.learnspanish.service.UserService;
 import com.fmi.learnspanish.service.VocabularyService;
-import com.fmi.learnspanish.web.rest.resource.RegisterUserResource;
+import com.fmi.learnspanish.web.resource.RegisterUserResource;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -90,6 +91,10 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		User user = userRepository.findByUsername(username);
+		
+		if(Objects.isNull(user)){
+			throw new UsernameNotFoundException("Sorry, user " + username + " is not found.");
+		}
 
 		Set<GrantedAuthority> authorities = new HashSet<>(user.getAuthorities());
 		return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),

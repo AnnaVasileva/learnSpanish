@@ -21,7 +21,7 @@ import com.fmi.learnspanish.repository.QuestionRepository;
 import com.fmi.learnspanish.repository.UserRepository;
 import com.fmi.learnspanish.service.PracticeService;
 import com.fmi.learnspanish.service.SessionService;
-import com.fmi.learnspanish.web.rest.resource.QuestionResource;
+import com.fmi.learnspanish.web.resource.QuestionResource;
 
 @Service
 public class PracticeServiceImpl implements PracticeService {

@@ -38,7 +38,7 @@ public class ApplicationSecurityConfiguration extends WebSecurityConfigurerAdapt
         .antMatchers("/index", "/about", "/users/register").permitAll()//
         .anyRequest().authenticated()//
         .and()//
-        .formLogin().loginPage("/users/login").permitAll()// in case of issues try with "/login"
+        .formLogin().loginPage("/users/login").permitAll()//
         .usernameParameter("username")//
         .usernameParameter("password")//
         .defaultSuccessUrl("/home", true)//
