@@ -1,12 +1,13 @@
 package com.fmi.learnspanish.service;
 
-import com.fmi.learnspanish.domain.GrammarLevel;
-
 import javax.servlet.http.HttpSession;
+
+import com.fmi.learnspanish.domain.GrammarLevel;
+import com.fmi.learnspanish.domain.MainLevel;
 
 public interface GrammarService {
 
-  GrammarLevel createGrammarLevel();
+  GrammarLevel createGrammarLevel(MainLevel level);
 
   void setLessonGrammar(HttpSession session, int lessonNumber);
 

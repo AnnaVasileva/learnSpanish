@@ -27,12 +27,17 @@
                 <div class="sidebar-content-body">
                     <table>
                         <tr>
-                            <td>username: </td>
+                            <td>Username: </td>
                             <td>[[${session.username}]]</td>
                         </tr>
                         <tr>
-                            <td>email: </td>
+                            <td>Email: </td>
                             <td>[[${session.email}]]</td>
+                        </tr>
+                        <tr>
+                            <td>Level: </td>
+                            <td th:if="${#strings.equals(session.level, 'BEGINNER')}">Beginner</td>
+                            <td th:unless="${#strings.equals(session.level, 'BEGINNER')}">Intermediate</td>
                         </tr>
                     </table>
                 </div>

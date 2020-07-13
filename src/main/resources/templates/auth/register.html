@@ -4,17 +4,13 @@
 <!------ Include the above in your HEAD tag ---------->
 
 <!DOCTYPE html>
-<html
-        lang="en"
-        xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:th="http://www.thymeleaf.org"
->
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
-    <th:block th:include="~{_shared/head}"/>
+    <th:block th:include="~{_shared/head}" />
     <link rel="stylesheet" type="text/css" href="/css/register.css">
     <link rel="stylesheet" type="text/css" href="/css/buttons.css">
 
@@ -22,7 +18,7 @@
 
 <body>
     <div class="wrapper">
-       <th:block th:include="~{_shared/header}"/>
+        <th:block th:include="~{_shared/header}" />
 
         <div class="container">
             <div class="d-flex justify-content-center h-100">
@@ -59,7 +55,17 @@
                             <div class="input-group form-group">
                                 <input type="password" class="form-control" id="confirmPassword" name="confirmPassword">
                             </div>
-                            
+
+                            <div class="label-holder textCol d-flex">
+                                <label for="level" class="text-white">Choose Spanish Level</label>
+                            </div>
+                            <div id="radioLevelBtn">
+                                <input type="radio" id="beginner" name="level" value="beginner" checked="checked">
+                                <label id="beginnerBtn" for="level">Beginner</label>
+                                <input type="radio" id="intermediate" name="level" value="intermediate">
+                                <label for="level">Intermediate</label><br>
+                            </div>
+
                             <div class="button-container">
                                 <a href="/users/login"><span class="btn float-left cancel_btn">Cancel</span></a>
                                 <button type="submit" class="btn float-right yellow_btn">Create</button>
@@ -70,7 +76,7 @@
             </div>
         </div>
 
-        <th:block th:include="~{_shared/footer}"/>
+        <th:block th:include="~{_shared/footer}" />
     </div>
 </body>
 

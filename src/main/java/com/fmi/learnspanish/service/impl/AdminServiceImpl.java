@@ -38,6 +38,11 @@ public class AdminServiceImpl implements AdminService {
 		users.forEach(user -> {
 			UserStatisticsResource userStatisticsResource = new UserStatisticsResource();
 			userStatisticsResource.setUsername(user.getUsername());
+
+			String mainLevelString = user.getLevel().toString();
+			String capitalizedMainLevel = mainLevelString.substring(0, 1) + mainLevelString.substring(1).toLowerCase();
+			userStatisticsResource.setMainLevel(capitalizedMainLevel);
+
 			userStatisticsResource.setGrammarLevel(user.getGrammarLevel().getLesson().getTitle());
 			userStatisticsResource.setVocabularyLevel(user.getVocabularyLevel().getLesson().getTitle());
 			userStatisticsResource.setPracticeLevel(user.getPracticeLevel().getLesson().getTitle());

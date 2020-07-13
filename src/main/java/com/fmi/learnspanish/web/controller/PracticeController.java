@@ -23,8 +23,8 @@ public class PracticeController {
 	private PracticeService practiceService;
 
 	@GetMapping("/lesson-{lessonNumber}")
-	public ModelAndView getGrammarLesson(@PathVariable int lessonNumber, ModelAndView modelAndView) {
-		List<QuestionResource> questions = practiceService.getQuestions(lessonNumber);
+	public ModelAndView getQuesions(@PathVariable int lessonNumber, HttpSession session, ModelAndView modelAndView) {
+		List<QuestionResource> questions = practiceService.getQuestions(session, lessonNumber);
 		modelAndView.addObject("questions", questions);
 		modelAndView.addObject("currentPracticeLessonNumber", lessonNumber);
 		modelAndView.setViewName("practice-lessons/quiz.html");

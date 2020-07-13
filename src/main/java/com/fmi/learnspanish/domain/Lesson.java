@@ -7,6 +7,8 @@ import java.util.Collection;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -28,6 +30,10 @@ public class Lesson {
 	@GenericGenerator(name = "uuid2", strategy = "uuid2")
 	@Column(length = 36)
 	private String id;
+	
+	@Column(name = "MAIN_LEVEL")
+	@Enumerated(EnumType.STRING)
+	private MainLevel level;
 
 	@Column(name = "LESSON_NUMBER")
 	private int lessonNumber;
@@ -43,11 +49,5 @@ public class Lesson {
 
 	@OneToMany(mappedBy = "lesson", orphanRemoval = true, cascade = { CascadeType.ALL })
 	private Collection<Question> questions;
-
-	@OneToMany(mappedBy = "lesson", orphanRemoval = true, cascade = { CascadeType.ALL })
-	private Collection<GrammarLevel> grammarLevel;
-
-	@OneToMany(mappedBy = "lesson", orphanRemoval = true, cascade = { CascadeType.ALL })
-	private Collection<VocabularyLevel> vocabularyLevel;
 
 }

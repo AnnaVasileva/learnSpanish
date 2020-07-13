@@ -6,6 +6,8 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -42,6 +44,10 @@ public class User implements UserDetails {
 
 	@Column(name = "PASSWORD")
 	private String password;
+	
+	@Column(name = "MAIN_LEVEL")
+	@Enumerated(EnumType.STRING)
+	private MainLevel level;
 
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "GRAMMAR_LEVEL_ID", referencedColumnName = "ID")

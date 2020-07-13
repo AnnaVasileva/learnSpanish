@@ -16,20 +16,21 @@ import com.fmi.learnspanish.service.GrammarService;
 @RequestMapping("/grammar")
 public class GrammarController {
 
-  @Autowired
-  private GrammarService grammarService;
+	@Autowired
+	private GrammarService grammarService;
 
-  @GetMapping("/lesson-{lessonNumber}")
-  public ModelAndView getGrammarLesson(@PathVariable int lessonNumber, ModelAndView modelAndView, HttpSession session) {
-    grammarService.setLessonGrammar(session, lessonNumber);
-    modelAndView.setViewName("grammar-lessons/grammar-lesson-content.html");
-    return modelAndView;
-  }
+	@GetMapping("/lesson-{lessonNumber}")
+	public ModelAndView getGrammarLesson(@PathVariable int lessonNumber, ModelAndView modelAndView,
+			HttpSession session) {
+		grammarService.setLessonGrammar(session, lessonNumber);
+		modelAndView.setViewName("grammar-lessons/grammar-lesson-content.html");
+		return modelAndView;
+	}
 
-  @PostMapping("/grammarUp")
-  public ModelAndView levelUp(HttpSession session) {
-    grammarService.grammarUp(session);
-    return new ModelAndView("redirect:/learn/grammar/" + session.getAttribute("email"));
-  }
+	@PostMapping("/grammarUp")
+	public ModelAndView levelUp(HttpSession session) {
+		grammarService.grammarUp(session);
+		return new ModelAndView("redirect:/learn/grammar/" + session.getAttribute("email"));
+	}
 
 }

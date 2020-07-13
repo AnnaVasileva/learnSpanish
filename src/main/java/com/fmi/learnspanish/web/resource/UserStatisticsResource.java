@@ -10,6 +10,8 @@ import lombok.Setter;
 public class UserStatisticsResource {
 
 	private String username;
+	
+	private String mainLevel;
 
 	private String grammarLevel;
 

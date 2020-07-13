@@ -38,8 +38,8 @@ public class VocabularyController {
 
   @GetMapping("/{categoryType}-deck-{lessonNumber}")
   public ModelAndView getDeck(@PathVariable String categoryType, @PathVariable int lessonNumber,
-      ModelAndView modelAndView) {
-    List<FlashcardResource> deck = wordService.getCards(categoryType, lessonNumber);
+		  HttpSession session, ModelAndView modelAndView) {
+    List<FlashcardResource> deck = wordService.getCards(session, categoryType, lessonNumber);
 
     modelAndView.addObject("deck", deck);
     modelAndView.addObject("currentLesson", lessonNumber);

@@ -12,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.fmi.learnspanish.domain.GrammarLevel;
+import com.fmi.learnspanish.domain.MainLevel;
 import com.fmi.learnspanish.domain.PracticeLevel;
 import com.fmi.learnspanish.domain.Role;
 import com.fmi.learnspanish.domain.User;
@@ -59,13 +60,22 @@ public class UserServiceImpl implements UserService {
 		user.setEmail(registerUserResource.getEmail());
 		user.setPassword(bCryptPasswordEncoder.encode(registerUserResource.getPassword()));
 
-		GrammarLevel grammarLevel = grammarService.createGrammarLevel();
+		MainLevel level = null;
+		if (registerUserResource.getLevel().equalsIgnoreCase(MainLevel.BEGINNER.toString())) {
+			level = MainLevel.BEGINNER;
+			user.setLevel(level);
+		} else {
+			level = MainLevel.INTERMIDIATE;
+			user.setLevel(level);
+		}
+
+		GrammarLevel grammarLevel = grammarService.createGrammarLevel(level);
 		user.setGrammarLevel(grammarLevel);
 
-		VocabularyLevel vocabularyLevel = vocabularyService.createVocabularyLevel();
+		VocabularyLevel vocabularyLevel = vocabularyService.createVocabularyLevel(level);
 		user.setVocabularyLevel(vocabularyLevel);
 
-		PracticeLevel practiceLevel = practiceService.createPracticeLevel();
+		PracticeLevel practiceLevel = practiceService.createPracticeLevel(level);
 		user.setPracticeLevel(practiceLevel);
 
 		Role role = roleRepository.findByAuthority("USER");
@@ -91,8 +101,8 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		User user = userRepository.findByUsername(username);
-		
-		if(Objects.isNull(user)){
+
+		if (Objects.isNull(user)) {
 			throw new UsernameNotFoundException("Sorry, user " + username + " is not found.");
 		}
 
