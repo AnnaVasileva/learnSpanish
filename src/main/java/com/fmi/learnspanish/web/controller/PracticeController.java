@@ -1,21 +1,21 @@
-package com.fmi.learnspanish.web.rest.controller;
+package com.fmi.learnspanish.web.controller;
 
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fmi.learnspanish.service.PracticeService;
-import com.fmi.learnspanish.web.rest.resource.QuestionResource;
+import com.fmi.learnspanish.web.resource.QuestionResource;
 
-@RestController
+@Controller
 @RequestMapping("/practice")
 public class PracticeController {
 
@@ -23,8 +23,8 @@ public class PracticeController {
 	private PracticeService practiceService;
 
 	@GetMapping("/lesson-{lessonNumber}")
-	public ModelAndView getGrammarLesson(@PathVariable int lessonNumber, ModelAndView modelAndView) {
-		List<QuestionResource> questions = practiceService.getQuestions(lessonNumber);
+	public ModelAndView getQuesions(@PathVariable int lessonNumber, HttpSession session, ModelAndView modelAndView) {
+		List<QuestionResource> questions = practiceService.getQuestions(session, lessonNumber);
 		modelAndView.addObject("questions", questions);
 		modelAndView.addObject("currentPracticeLessonNumber", lessonNumber);
 		modelAndView.setViewName("practice-lessons/quiz.html");

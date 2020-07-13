@@ -19,6 +19,7 @@ public class SessionServiceImpl implements SessionService {
     session.setAttribute("user", user);
     session.setAttribute("email", user.getEmail());
     session.setAttribute("username", user.getUsername());
+    session.setAttribute("level", user.getLevel());
     session.setAttribute("grammarLevel", user.getGrammarLevel().getLevel());
     session.setAttribute("grammarLessonTitle", user.getGrammarLevel().getLesson().getTitle());
     session.setAttribute("vocabularyLevel", user.getVocabularyLevel().getLevel());

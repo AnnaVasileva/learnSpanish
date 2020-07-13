@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fmi.learnspanish.domain.Lesson;
+import com.fmi.learnspanish.domain.MainLevel;
 import com.fmi.learnspanish.domain.PracticeLevel;
 import com.fmi.learnspanish.domain.Question;
 import com.fmi.learnspanish.domain.User;
@@ -21,7 +22,7 @@ import com.fmi.learnspanish.repository.QuestionRepository;
 import com.fmi.learnspanish.repository.UserRepository;
 import com.fmi.learnspanish.service.PracticeService;
 import com.fmi.learnspanish.service.SessionService;
-import com.fmi.learnspanish.web.rest.resource.QuestionResource;
+import com.fmi.learnspanish.web.resource.QuestionResource;
 
 @Service
 public class PracticeServiceImpl implements PracticeService {
@@ -44,8 +45,8 @@ public class PracticeServiceImpl implements PracticeService {
 	private SessionService sessionService;
 
 	@Override
-	public PracticeLevel createPracticeLevel() {
-		Lesson lesson = lessonRepository.findByLessonNumber(DEFAULT_LESSON);
+	public PracticeLevel createPracticeLevel(MainLevel level) {
+		Lesson lesson = lessonRepository.findByLevelAndLessonNumber(level, DEFAULT_LESSON);
 		PracticeLevel practiceLevel = new PracticeLevel();
 		practiceLevel.setLesson(lesson);
 		practiceLevel.setLevel(lesson.getLessonNumber());
@@ -54,8 +55,9 @@ public class PracticeServiceImpl implements PracticeService {
 	}
 
 	@Override
-	public List<QuestionResource> getQuestions(int lessonNumber) {
-		Lesson lesson = lessonRepository.findByLessonNumber(lessonNumber);
+	public List<QuestionResource> getQuestions(HttpSession session, int lessonNumber) {
+		MainLevel level = (MainLevel) session.getAttribute("level");
+		Lesson lesson = lessonRepository.findByLevelAndLessonNumber(level, lessonNumber);
 		List<Question> questions = questionRepository.findAllByLessonId(lesson.getId());
 
 		List<QuestionResource> questionResourceList = new ArrayList<>();
@@ -81,11 +83,12 @@ public class PracticeServiceImpl implements PracticeService {
 	@Override
 	public void practiceUp(HttpSession session, int lessonNumber) {
 		User user = userRepository.findByEmail((String) session.getAttribute("email"));
-
+		MainLevel level = user.getLevel();
+		
 		if (user.getPracticeLevel().getLevel() == lessonNumber) {
 
 			int nextLessonNumber = user.getPracticeLevel().getLevel() + 1;
-			Lesson nextLesson = lessonRepository.findByLessonNumber(nextLessonNumber);
+			Lesson nextLesson = lessonRepository.findByLevelAndLessonNumber(level, nextLessonNumber);
 
 			if (Objects.nonNull(nextLesson)) {
 				user.getPracticeLevel().setLevel(nextLessonNumber);

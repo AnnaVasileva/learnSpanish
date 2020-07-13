@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Numans');
-html, body {
+html,
+body {
     height: 100%;
 }
 
@@ -69,4 +70,14 @@ input:focus {
 .header-right a.active-login {
     background-color: #FFC312;
     color: black;
+}
+
+#radioLevelBtn {
+    color: white;
+    margin-left: 0px;
+    text-align: left;
+}
+
+#beginnerBtn {
+    margin-right: 50px;
 }

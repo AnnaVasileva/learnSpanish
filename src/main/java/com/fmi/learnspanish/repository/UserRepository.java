@@ -2,6 +2,8 @@ package com.fmi.learnspanish.repository;
 
 import com.fmi.learnspanish.domain.User;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -15,5 +17,7 @@ public interface UserRepository extends JpaRepository<User, String> {
   User findByUsername(String username);
   
   User findByUsernameAndEmail(String username, String email);
+  
+  List<User> findAllByOrderByUsername();
 
 }

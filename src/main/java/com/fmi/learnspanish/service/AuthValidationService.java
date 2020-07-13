@@ -1,8 +1,9 @@
 package com.fmi.learnspanish.service;
 
-import com.fmi.learnspanish.web.rest.resource.RegisterUserResource;
+import com.fmi.learnspanish.web.exeptionhandling.InvalidUserException;
+import com.fmi.learnspanish.web.resource.RegisterUserResource;
 
 public interface AuthValidationService {
 
-  boolean isValid(RegisterUserResource registerUserResource) throws Exception;
+  boolean isValid(RegisterUserResource registerUserResource) throws InvalidUserException;
 }

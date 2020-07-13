@@ -1,21 +1,13 @@
-package com.fmi.learnspanish.web.rest.controller;
+package com.fmi.learnspanish.web.controller;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.fmi.learnspanish.service.AuthenticatedUserService;
-
-@RestController
+@Controller
 @RequestMapping("/")
 public class HomeController {
-
-	@Autowired
-	private AuthenticatedUserService authenticatedUserService;
 
 	@GetMapping("")
 	public ModelAndView getIndex(ModelAndView modelAndView) {
@@ -25,8 +17,6 @@ public class HomeController {
 
 	@GetMapping("home")
 	public ModelAndView getHome(ModelAndView modelAndView) {
-		List<String> authorities = authenticatedUserService.getRoles();
-		System.out.printf("authorities - > %s%n", authorities);
 		modelAndView.setViewName("home/home.html");
 		return modelAndView;
 	}

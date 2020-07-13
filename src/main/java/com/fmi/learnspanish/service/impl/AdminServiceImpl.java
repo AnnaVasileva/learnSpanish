@@ -14,8 +14,10 @@ import com.fmi.learnspanish.domain.User;
 import com.fmi.learnspanish.repository.RoleRepository;
 import com.fmi.learnspanish.repository.UserRepository;
 import com.fmi.learnspanish.service.AdminService;
-import com.fmi.learnspanish.web.rest.resource.MakeAdminResource;
-import com.fmi.learnspanish.web.rest.resource.UserStatisticsResource;
+import com.fmi.learnspanish.web.exeptionhandling.AdminAlreadyExistsException;
+import com.fmi.learnspanish.web.exeptionhandling.UserNotFoundException;
+import com.fmi.learnspanish.web.resource.MakeAdminResource;
+import com.fmi.learnspanish.web.resource.UserStatisticsResource;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -31,11 +33,16 @@ public class AdminServiceImpl implements AdminService {
 
 	@Override
 	public List<UserStatisticsResource> getUsersStatistics() {
-		List<User> users = userRepository.findAll();
+		List<User> users = userRepository.findAllByOrderByUsername();
 		List<UserStatisticsResource> usersStatisticsList = new ArrayList<>();
 		users.forEach(user -> {
 			UserStatisticsResource userStatisticsResource = new UserStatisticsResource();
 			userStatisticsResource.setUsername(user.getUsername());
+
+			String mainLevelString = user.getLevel().toString();
+			String capitalizedMainLevel = mainLevelString.substring(0, 1) + mainLevelString.substring(1).toLowerCase();
+			userStatisticsResource.setMainLevel(capitalizedMainLevel);
+
 			userStatisticsResource.setGrammarLevel(user.getGrammarLevel().getLesson().getTitle());
 			userStatisticsResource.setVocabularyLevel(user.getVocabularyLevel().getLesson().getTitle());
 			userStatisticsResource.setPracticeLevel(user.getPracticeLevel().getLesson().getTitle());
@@ -47,18 +54,21 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public void makeAdmin(MakeAdminResource makeAdminResource) {
+	public void makeAdmin(MakeAdminResource makeAdminResource)
+			throws AdminAlreadyExistsException, UserNotFoundException {
 		User user = userRepository.findByUsernameAndEmail(makeAdminResource.getUsername(),
 				makeAdminResource.getEmail());
 
 		if (Objects.nonNull(user)) {
 			Role adminRole = roleRepository.findByAuthority("ADMIN");
-			
-			if(user.getAuthorities().contains(adminRole)){
+
+			if (user.getAuthorities().contains(adminRole)) {
 				log.warn("User {} with email {}, is already an admin.", makeAdminResource.getUsername(),
 						makeAdminResource.getEmail());
+				throw new AdminAlreadyExistsException(
+						"User " + makeAdminResource.getUsername() + " is already an admin.");
 			}
-			
+
 			Set<Role> authorities = new HashSet<>();
 			authorities.add(adminRole);
 			user.setAuthorities(authorities);
@@ -66,6 +76,7 @@ public class AdminServiceImpl implements AdminService {
 		} else {
 			log.warn("User {} with email {}, was not found.", makeAdminResource.getUsername(),
 					makeAdminResource.getEmail());
+			throw new UserNotFoundException("User not found.");
 		}
 
 	}

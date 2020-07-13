@@ -1,4 +1,4 @@
-package com.fmi.learnspanish.web.rest.resource;
+package com.fmi.learnspanish.web.resource;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,6 +10,8 @@ import lombok.Setter;
 public class UserStatisticsResource {
 
 	private String username;
+	
+	private String mainLevel;
 
 	private String grammarLevel;
 

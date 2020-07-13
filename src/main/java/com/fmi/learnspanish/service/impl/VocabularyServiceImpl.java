@@ -1,6 +1,16 @@
 package com.fmi.learnspanish.service.impl;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Objects;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.fmi.learnspanish.domain.Lesson;
+import com.fmi.learnspanish.domain.MainLevel;
 import com.fmi.learnspanish.domain.User;
 import com.fmi.learnspanish.domain.VocabularyCategory;
 import com.fmi.learnspanish.domain.VocabularyCategoryType;
@@ -13,127 +23,117 @@ import com.fmi.learnspanish.repository.VocabularyLevelRepository;
 import com.fmi.learnspanish.service.SessionService;
 import com.fmi.learnspanish.service.VocabularyService;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Objects;
-
-import javax.servlet.http.HttpSession;
-
 @Service
 public class VocabularyServiceImpl implements VocabularyService {
 
-  private static final int DEFAULT_LESSON = 1;
+	private static final int DEFAULT_LESSON = 1;
 
-  @Autowired
-  private LessonRepository lessonRepository;
+	@Autowired
+	private LessonRepository lessonRepository;
 
-  @Autowired
-  private VocabularyLevelRepository vocabularyLevelRepository;
+	@Autowired
+	private VocabularyLevelRepository vocabularyLevelRepository;
 
-  @Autowired
-  private VocabularyCategoryRepository vocabularyCategoryRepository;
+	@Autowired
+	private VocabularyCategoryRepository vocabularyCategoryRepository;
 
-  @Autowired
-  private SessionService sessionService;
+	@Autowired
+	private SessionService sessionService;
 
-  @Autowired
-  private UserRepository userRepository;
+	@Autowired
+	private UserRepository userRepository;
 
-  @Override
-  public VocabularyLevel createVocabularyLevel() {
-    Lesson lesson = lessonRepository.findByLessonNumber(DEFAULT_LESSON);
+	@Override
+	public VocabularyLevel createVocabularyLevel(MainLevel level) {
+		Lesson lesson = lessonRepository.findByLevelAndLessonNumber(level, DEFAULT_LESSON);
 
-    VocabularyLevel vocabularyLevel = new VocabularyLevel();
-    vocabularyLevel.setLesson(lesson);
-    vocabularyLevel.setLevel(lesson.getLessonNumber());
-    vocabularyLevelRepository.saveAndFlush(vocabularyLevel);
+		VocabularyLevel vocabularyLevel = new VocabularyLevel();
+		vocabularyLevel.setLesson(lesson);
+		vocabularyLevel.setLevel(lesson.getLessonNumber());
+		vocabularyLevelRepository.saveAndFlush(vocabularyLevel);
 
-    setCategories(vocabularyLevel);
-    vocabularyLevelRepository.save(vocabularyLevel);
+		setCategories(vocabularyLevel);
+		vocabularyLevelRepository.save(vocabularyLevel);
 
-    return vocabularyLevel;
-  }
+		return vocabularyLevel;
+	}
 
-  private void setCategories(VocabularyLevel vocabularyLevel) {
-    VocabularyCategory vocabularyCategoryPictures =
-        createVocabularyCategory(VocabularyCategoryType.PICTURES, vocabularyLevel);
+	private void setCategories(VocabularyLevel vocabularyLevel) {
+		VocabularyCategory vocabularyCategoryPictures = createVocabularyCategory(VocabularyCategoryType.PICTURES,
+				vocabularyLevel);
 
-    VocabularyCategory vocabularyCategoryTranslations =
-        createVocabularyCategory(VocabularyCategoryType.TRANSLATIONS, vocabularyLevel);
+		VocabularyCategory vocabularyCategoryTranslations = createVocabularyCategory(
+				VocabularyCategoryType.TRANSLATIONS, vocabularyLevel);
 
-    VocabularyCategory vocabularyCategoryAntonyms =
-        createVocabularyCategory(VocabularyCategoryType.ANTONYMS, vocabularyLevel);
+		VocabularyCategory vocabularyCategoryAntonyms = createVocabularyCategory(VocabularyCategoryType.ANTONYMS,
+				vocabularyLevel);
 
-    Collection<VocabularyCategory> categories = new ArrayList<>();
-    categories.add(vocabularyCategoryPictures);
-    categories.add(vocabularyCategoryTranslations);
-    categories.add(vocabularyCategoryAntonyms);
+		Collection<VocabularyCategory> categories = new ArrayList<>();
+		categories.add(vocabularyCategoryPictures);
+		categories.add(vocabularyCategoryTranslations);
+		categories.add(vocabularyCategoryAntonyms);
 
-    vocabularyLevel.setCategories(categories);
-  }
+		vocabularyLevel.setCategories(categories);
+	}
 
-  private VocabularyCategory createVocabularyCategory(VocabularyCategoryType categoryType,
-      VocabularyLevel vocabularyLevel) {
-    VocabularyCategory vocabularyCategory = new VocabularyCategory();
-    vocabularyCategory.setCatagoryType(categoryType);
-    vocabularyCategory.setVocabularyLevel(vocabularyLevel);
-    vocabularyCategoryRepository.save(vocabularyCategory);
-    return vocabularyCategory;
-  }
+	private VocabularyCategory createVocabularyCategory(VocabularyCategoryType categoryType,
+			VocabularyLevel vocabularyLevel) {
+		VocabularyCategory vocabularyCategory = new VocabularyCategory();
+		vocabularyCategory.setCatagoryType(categoryType);
+		vocabularyCategory.setVocabularyLevel(vocabularyLevel);
+		vocabularyCategoryRepository.save(vocabularyCategory);
+		return vocabularyCategory;
+	}
 
-  @Override
-  public void categoryUpdate(HttpSession session, String currentCategory) {
-    statusUpdate(session, currentCategory);
-  }
+	@Override
+	public void categoryUpdate(HttpSession session, String currentCategory) {
+		statusUpdate(session, currentCategory);
+	}
 
-  private void statusUpdate(HttpSession session, String currentCategory) {
-    String email = (String) session.getAttribute("email");
-    User user = userRepository.findByEmail(email);
+	private void statusUpdate(HttpSession session, String currentCategory) {
+		User user = userRepository.findByEmail((String) session.getAttribute("email"));
 
-    Collection<VocabularyCategory> categories = user.getVocabularyLevel().getCategories();
-    categories.stream()//
-        .filter(category -> category.getCatagoryType().toString().equalsIgnoreCase(currentCategory))//
-        .forEach(category -> {
-          switch (category.getCatagoryType()) {
-          case PICTURES:
-            category.setStatus(VocabularyStatus.FINISHED);
-            session.setAttribute("picturesStatus", VocabularyStatus.FINISHED);
-            break;
-          case TRANSLATIONS:
-            category.setStatus(VocabularyStatus.FINISHED);
-            session.setAttribute("translationsStatus", VocabularyStatus.FINISHED);
-            break;
-          case ANTONYMS:
-            category.setStatus(VocabularyStatus.FINISHED);
-            session.setAttribute("antonymsStatus", VocabularyStatus.FINISHED);
-            break;
-          }
+		Collection<VocabularyCategory> categories = user.getVocabularyLevel().getCategories();
+		categories.stream()//
+				.filter(category -> category.getCatagoryType().toString().equalsIgnoreCase(currentCategory))//
+				.forEach(category -> {
+					switch (category.getCatagoryType()) {
+					case PICTURES:
+						category.setStatus(VocabularyStatus.FINISHED);
+						session.setAttribute("picturesStatus", VocabularyStatus.FINISHED);
+						break;
+					case TRANSLATIONS:
+						category.setStatus(VocabularyStatus.FINISHED);
+						session.setAttribute("translationsStatus", VocabularyStatus.FINISHED);
+						break;
+					case ANTONYMS:
+						category.setStatus(VocabularyStatus.FINISHED);
+						session.setAttribute("antonymsStatus", VocabularyStatus.FINISHED);
+						break;
+					}
 
-        });
+				});
 
-    vocabularyLevelUp(session, user, categories);
-    userRepository.saveAndFlush(user);
-  }
+		vocabularyLevelUp(session, user, categories);
+		userRepository.saveAndFlush(user);
+	}
 
-  private void vocabularyLevelUp(HttpSession session, User user, Collection<VocabularyCategory> categories) {
-    boolean allSubLevelsFinished =
-        categories.stream().allMatch(category -> category.getStatus().equals(VocabularyStatus.FINISHED));
-    if (allSubLevelsFinished) {
-      categories.forEach(category -> category.setStatus(VocabularyStatus.IN_PROGRESS));
+	private void vocabularyLevelUp(HttpSession session, User user, Collection<VocabularyCategory> categories) {
+		boolean allSubLevelsFinished = categories.stream()
+				.allMatch(category -> category.getStatus().equals(VocabularyStatus.FINISHED));
+		if (allSubLevelsFinished) {
+			categories.forEach(category -> category.setStatus(VocabularyStatus.IN_PROGRESS));
 
-      int nextLessonNumber = user.getVocabularyLevel().getLevel() + 1;
-      Lesson nextLesson = lessonRepository.findByLessonNumber(nextLessonNumber);
+			int nextLessonNumber = user.getVocabularyLevel().getLevel() + 1;
+			Lesson nextLesson = lessonRepository.findByLevelAndLessonNumber(user.getLevel(), nextLessonNumber);
 
-      if (Objects.nonNull(nextLesson)) {
-        user.getVocabularyLevel().setLesson(nextLesson);
-        user.getVocabularyLevel().setLevel(nextLessonNumber);
-      }
+			if (Objects.nonNull(nextLesson)) {
+				user.getVocabularyLevel().setLesson(nextLesson);
+				user.getVocabularyLevel().setLevel(nextLessonNumber);
+			}
 
-      sessionService.setSessionAttributes(session, user);
-    }
-  }
+			sessionService.setSessionAttributes(session, user);
+		}
+	}
 
 }

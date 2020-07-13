@@ -31,19 +31,19 @@ public class Question {
 	@JoinColumn(name = "LESSON_ID", referencedColumnName = "ID")
 	protected Lesson lesson;
 
-	@Column(name = "content")
+	@Column(name = "CONTENT")
 	private String content;
 
-	@Column(name = "correct_answer")
+	@Column(name = "CORRECT_ANSWER")
 	private String correctAnswer;
 
-	@Column(name = "wrong_option_1")
+	@Column(name = "WRONG_OPTION_1")
 	private String wrongOption1;
 
-	@Column(name = "wrong_option_2")
+	@Column(name = "WRONG_OPTION_2")
 	private String wrongOption2;
 
-	@Column(name = "wrong_option_3")
+	@Column(name = "WRONG_OPTION_3")
 	private String wrongOption3;
 
 }

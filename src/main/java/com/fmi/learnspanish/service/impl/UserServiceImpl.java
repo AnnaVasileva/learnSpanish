@@ -1,7 +1,7 @@
 package com.fmi.learnspanish.service.impl;
 
-import java.util.Collection;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +12,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.fmi.learnspanish.domain.GrammarLevel;
+import com.fmi.learnspanish.domain.MainLevel;
 import com.fmi.learnspanish.domain.PracticeLevel;
 import com.fmi.learnspanish.domain.Role;
 import com.fmi.learnspanish.domain.User;
-import com.fmi.learnspanish.domain.VocabularyCategory;
 import com.fmi.learnspanish.domain.VocabularyLevel;
 import com.fmi.learnspanish.repository.RoleRepository;
 import com.fmi.learnspanish.repository.UserRepository;
@@ -23,7 +23,7 @@ import com.fmi.learnspanish.service.GrammarService;
 import com.fmi.learnspanish.service.PracticeService;
 import com.fmi.learnspanish.service.UserService;
 import com.fmi.learnspanish.service.VocabularyService;
-import com.fmi.learnspanish.web.rest.resource.RegisterUserResource;
+import com.fmi.learnspanish.web.resource.RegisterUserResource;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private PracticeService practiceService;
-	
+
 	@Autowired
 	private UserRepository userRepository;
 
@@ -54,36 +54,35 @@ public class UserServiceImpl implements UserService {
 		if (registerUserResource == null) {
 			return null;
 		}
-		System.out.println("==========createUser==============");
+
 		User user = new User();
 		user.setUsername(registerUserResource.getUsername());
-		System.out.printf("name --> %s%n", user.getUsername());
 		user.setEmail(registerUserResource.getEmail());
-		System.out.printf("getEmail --> %s%n", user.getEmail());
 		user.setPassword(bCryptPasswordEncoder.encode(registerUserResource.getPassword()));
 
-		GrammarLevel grammarLevel = grammarService.createGrammarLevel();
+		MainLevel level = null;
+		if (registerUserResource.getLevel().equalsIgnoreCase(MainLevel.BEGINNER.toString())) {
+			level = MainLevel.BEGINNER;
+			user.setLevel(level);
+		} else {
+			level = MainLevel.INTERMIDIATE;
+			user.setLevel(level);
+		}
+
+		GrammarLevel grammarLevel = grammarService.createGrammarLevel(level);
 		user.setGrammarLevel(grammarLevel);
-		System.out.printf("grammarLevel --> %s%n", user.getGrammarLevel());
 
-		VocabularyLevel vocabularyLevel = vocabularyService.createVocabularyLevel();
+		VocabularyLevel vocabularyLevel = vocabularyService.createVocabularyLevel(level);
 		user.setVocabularyLevel(vocabularyLevel);
-		System.out.printf("vocabularyLevel --> %s%n", user.getVocabularyLevel());
-		Collection<VocabularyCategory> cat = user.getVocabularyLevel().getCategories();
-		cat.forEach(c -> System.out.printf("category --> %s%n", c.getId()));
 
-		PracticeLevel practiceLevel = practiceService.createPracticeLevel();
+		PracticeLevel practiceLevel = practiceService.createPracticeLevel(level);
 		user.setPracticeLevel(practiceLevel);
-		System.out.printf("PracticeLevel --> %s%n", user.getPracticeLevel());
-		
+
 		Role role = roleRepository.findByAuthority("USER");
 		Set<Role> roles = new HashSet<>();
 		roles.add(role);
-		System.out.printf("roles ---> ", role);
 		user.setAuthorities(roles);
-		user.getAuthorities().forEach(auth -> System.out.printf("user aut --> %s%n", auth));
-		
-		System.out.println("successful created user");
+
 		userRepository.saveAndFlush(user);
 		log.info("User {} was successfully created.", user.getUsername());
 		return user;
@@ -102,6 +101,10 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		User user = userRepository.findByUsername(username);
+
+		if (Objects.isNull(user)) {
+			throw new UsernameNotFoundException("Sorry, user " + username + " is not found.");
+		}
 
 		Set<GrantedAuthority> authorities = new HashSet<>(user.getAuthorities());
 		return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),

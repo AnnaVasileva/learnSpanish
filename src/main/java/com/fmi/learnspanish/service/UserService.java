@@ -3,7 +3,7 @@ package com.fmi.learnspanish.service;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 import com.fmi.learnspanish.domain.User;
-import com.fmi.learnspanish.web.rest.resource.RegisterUserResource;
+import com.fmi.learnspanish.web.resource.RegisterUserResource;
 
 public interface UserService extends UserDetailsService {
 

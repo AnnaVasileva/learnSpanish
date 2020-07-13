@@ -1,11 +1,13 @@
 package com.fmi.learnspanish.service;
 
-import com.fmi.learnspanish.web.rest.resource.FlashcardResource;
-
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
+import com.fmi.learnspanish.web.resource.FlashcardResource;
 
 public interface WordService {
 
-  List<FlashcardResource> getCards(String categoryType, int lessonNumber);
+  List<FlashcardResource> getCards(HttpSession session, String categoryType, int lessonNumber);
 
 }

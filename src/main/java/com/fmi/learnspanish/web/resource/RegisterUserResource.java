@@ -1,9 +1,11 @@
-package com.fmi.learnspanish.web.rest.resource;
+package com.fmi.learnspanish.web.resource;
 
 import java.util.Set;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+
+import com.fmi.learnspanish.domain.MainLevel;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,6 +29,9 @@ public class RegisterUserResource {
   @NotNull
   private String confirmPassword;
 
+  @NotNull
+  private String level;
+  
   private Set<RoleServiceModel> authorities;
 
 }

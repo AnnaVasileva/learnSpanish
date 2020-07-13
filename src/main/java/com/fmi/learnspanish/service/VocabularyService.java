@@ -1,12 +1,13 @@
 package com.fmi.learnspanish.service;
 
-import com.fmi.learnspanish.domain.VocabularyLevel;
-
 import javax.servlet.http.HttpSession;
+
+import com.fmi.learnspanish.domain.MainLevel;
+import com.fmi.learnspanish.domain.VocabularyLevel;
 
 public interface VocabularyService {
 
-  VocabularyLevel createVocabularyLevel();
+  VocabularyLevel createVocabularyLevel(MainLevel level);
 
   void categoryUpdate(HttpSession session, String vocabularyCategory);
 
