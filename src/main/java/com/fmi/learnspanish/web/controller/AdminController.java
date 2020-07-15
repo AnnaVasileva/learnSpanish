@@ -30,8 +30,8 @@ public class AdminController {
 	@PreAuthorize("hasAuthority('ADMIN')")
 	public ModelAndView getUsersStatistics(ModelAndView modelAndView) throws StatisticsNotFoundException {
 		List<UserStatisticsResource> usersStatistics = adminService.getUsersStatistics();
-		modelAndView.addObject("usersStatistics", usersStatistics);
 		modelAndView.setViewName("admin/usersStatistics.html");
+		modelAndView.addObject("usersStatistics", usersStatistics);
 		return modelAndView;
 	}
 

@@ -16,10 +16,10 @@ import com.fmi.learnspanish.web.resource.RegisterUserResource;
 
 public class AuthValidationServiceImplTest {
 
-	private static final String NOT_MATCHING_PASSWORD = "notMatchingPassword";
 	private static final String USERNAME = "testUsername";
 	private static final String EMAIL = "testEmail";
 	private static final String PASSWORD = "testPassword";
+	private static final String NOT_MATCHING_PASSWORD = "notMatchingPassword";
 
 	@InjectMocks
 	AuthValidationServiceImpl authenticatedUserServiceImpl;
