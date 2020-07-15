@@ -11,24 +11,28 @@ import com.fmi.learnspanish.web.resource.RegisterUserResource;
 @Service
 public class AuthValidationServiceImpl implements AuthValidationService {
 
-  @Autowired
-  private UserRepository userRepository;
+	@Autowired
+	private UserRepository userRepository;
 
-  @Override
-  public boolean isValid(RegisterUserResource registerUserResource) throws InvalidUserException {
-    if (!arePasswordsMatching(registerUserResource.getPassword(), registerUserResource.getConfirmPassword())
-        || isAccountTaken(registerUserResource.getEmail())) {
-      throw new InvalidUserException("Invalid user. Please, try again.");
-    }
-    return true;
-  }
+	@Override
+	public boolean isValid(RegisterUserResource registerUserResource) throws InvalidUserException {
+		String password = registerUserResource.getPassword();
+		String confirmPassword = registerUserResource.getConfirmPassword();
+		String email = registerUserResource.getEmail();
 
-  private boolean arePasswordsMatching(String password, String confirmPassword) {
-    return password.equals(confirmPassword);
-  }
+		if (!arePasswordsMatching(password, confirmPassword) || isAccountTaken(email)) {
+			throw new InvalidUserException("Invalid user. Please, try again.");
+		}
+		
+		return true;
+	}
 
-  private boolean isAccountTaken(String email) {
-    return userRepository.existsByEmail(email);
-  }
+	private boolean arePasswordsMatching(String password, String confirmPassword) {
+		return password.equals(confirmPassword);
+	}
+
+	private boolean isAccountTaken(String email) {
+		return userRepository.existsByEmail(email);
+	}
 
 }

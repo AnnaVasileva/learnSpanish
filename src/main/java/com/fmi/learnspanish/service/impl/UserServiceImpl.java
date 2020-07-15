@@ -61,7 +61,8 @@ public class UserServiceImpl implements UserService {
 		user.setPassword(bCryptPasswordEncoder.encode(registerUserResource.getPassword()));
 
 		MainLevel level = null;
-		if (registerUserResource.getLevel().equalsIgnoreCase(MainLevel.BEGINNER.toString())) {
+		if (Objects.isNull(registerUserResource.getLevel())
+				|| registerUserResource.getLevel().equalsIgnoreCase(MainLevel.BEGINNER.toString())) {
 			level = MainLevel.BEGINNER;
 			user.setLevel(level);
 		} else {
@@ -99,7 +100,7 @@ public class UserServiceImpl implements UserService {
 	// }
 
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+	public UserDetails loadUserByUsername(String username) {
 		User user = userRepository.findByUsername(username);
 
 		if (Objects.isNull(user)) {

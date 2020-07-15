@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.fmi.learnspanish.service.AdminService;
 import com.fmi.learnspanish.web.exeptionhandling.AdminAlreadyExistsException;
+import com.fmi.learnspanish.web.exeptionhandling.StatisticsNotFoundException;
 import com.fmi.learnspanish.web.exeptionhandling.UserNotFoundException;
 import com.fmi.learnspanish.web.resource.MakeAdminResource;
 import com.fmi.learnspanish.web.resource.UserStatisticsResource;
@@ -27,7 +28,7 @@ public class AdminController {
 
 	@GetMapping("/statistics")
 	@PreAuthorize("hasAuthority('ADMIN')")
-	public ModelAndView getUsersStatistics(ModelAndView modelAndView) {
+	public ModelAndView getUsersStatistics(ModelAndView modelAndView) throws StatisticsNotFoundException {
 		List<UserStatisticsResource> usersStatistics = adminService.getUsersStatistics();
 		modelAndView.addObject("usersStatistics", usersStatistics);
 		modelAndView.setViewName("admin/usersStatistics.html");

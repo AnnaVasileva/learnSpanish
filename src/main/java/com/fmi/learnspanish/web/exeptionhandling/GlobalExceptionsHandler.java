@@ -31,6 +31,14 @@ public class GlobalExceptionsHandler {
 		return modelAndView;
 	}
 	
+	@ExceptionHandler(StatisticsNotFoundException.class)
+	public ModelAndView handleException(StatisticsNotFoundException ex) {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("errors/error.html");
+		modelAndView.addObject("message", ex.getMessage());
+		return modelAndView;
+	}
+	
 	@ExceptionHandler(AdminAlreadyExistsException.class)
 	public ModelAndView handleException(AdminAlreadyExistsException ex) {
 		ModelAndView modelAndView = new ModelAndView();
@@ -38,4 +46,6 @@ public class GlobalExceptionsHandler {
 		modelAndView.addObject("message", ex.getMessage());
 		return modelAndView;
 	}
+	
+	
 }
