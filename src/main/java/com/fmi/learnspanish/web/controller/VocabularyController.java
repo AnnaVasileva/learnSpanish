@@ -31,8 +31,8 @@ public class VocabularyController {
 
   @GetMapping("/lesson-{lessonNumber}")
   public ModelAndView getVocabularyLessonDecks(@PathVariable int lessonNumber, ModelAndView modelAndView) {
+	  modelAndView.setViewName("learn/vocabulary-menu.html");
     modelAndView.addObject("currentLesson", lessonNumber);
-    modelAndView.setViewName("learn/vocabulary-menu.html");
     return modelAndView;
   }
 
@@ -41,9 +41,9 @@ public class VocabularyController {
 		  HttpSession session, ModelAndView modelAndView) {
     List<FlashcardResource> deck = wordService.getCards(session, categoryType, lessonNumber);
 
+    modelAndView.setViewName("learnCategories/" + categoryType + ".html");
     modelAndView.addObject("deck", deck);
     modelAndView.addObject("currentLesson", lessonNumber);
-    modelAndView.setViewName("learnCategories/" + categoryType + ".html");
     return modelAndView;
   }
 

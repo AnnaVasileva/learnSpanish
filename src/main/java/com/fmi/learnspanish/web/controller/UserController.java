@@ -9,7 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class UserController {
 
 	@GetMapping("/profile/{email}")
-	public ModelAndView getUserProfile(@PathVariable String email, ModelAndView modelAndView/*, HttpSession session*/) {
+	public ModelAndView getUserProfile(@PathVariable String email, ModelAndView modelAndView) {
 		modelAndView.setViewName("user/profile.html");
 		return modelAndView;
 	}

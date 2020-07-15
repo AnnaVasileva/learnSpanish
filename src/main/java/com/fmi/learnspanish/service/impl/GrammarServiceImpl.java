@@ -96,17 +96,18 @@ public class GrammarServiceImpl implements GrammarService {
 	public void grammarUp(HttpSession session) {
 		User user = userRepository.findByEmail((String) session.getAttribute("email"));
 		MainLevel level = user.getLevel();
-		
+
 		int nextLessonNumber = user.getGrammarLevel().getLevel() + 1;
 		Lesson nextLesson = lessonRepository.findByLevelAndLessonNumber(level, nextLessonNumber);
 
 		if (Objects.nonNull(nextLesson)) {
 			user.getGrammarLevel().setLevel(nextLessonNumber);
 			user.getGrammarLevel().setLesson(nextLesson);
+			//Those two should go in the if clause
+			userRepository.saveAndFlush(user);
+			sessionService.setSessionAttributes(session, user);
 		}
 
-		userRepository.saveAndFlush(user);
-		sessionService.setSessionAttributes(session, user);
 	}
 
 }

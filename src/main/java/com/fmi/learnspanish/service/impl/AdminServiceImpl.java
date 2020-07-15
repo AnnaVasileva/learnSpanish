@@ -15,6 +15,7 @@ import com.fmi.learnspanish.repository.RoleRepository;
 import com.fmi.learnspanish.repository.UserRepository;
 import com.fmi.learnspanish.service.AdminService;
 import com.fmi.learnspanish.web.exeptionhandling.AdminAlreadyExistsException;
+import com.fmi.learnspanish.web.exeptionhandling.StatisticsNotFoundException;
 import com.fmi.learnspanish.web.exeptionhandling.UserNotFoundException;
 import com.fmi.learnspanish.web.resource.MakeAdminResource;
 import com.fmi.learnspanish.web.resource.UserStatisticsResource;
@@ -32,8 +33,13 @@ public class AdminServiceImpl implements AdminService {
 	private RoleRepository roleRepository;
 
 	@Override
-	public List<UserStatisticsResource> getUsersStatistics() {
+	public List<UserStatisticsResource> getUsersStatistics() throws StatisticsNotFoundException {
 		List<User> users = userRepository.findAllByOrderByUsername();
+		
+		if(Objects.isNull(users)){
+			throw new StatisticsNotFoundException("Sorry, no statistivs are found.");
+		}
+		
 		List<UserStatisticsResource> usersStatisticsList = new ArrayList<>();
 		users.forEach(user -> {
 			UserStatisticsResource userStatisticsResource = new UserStatisticsResource();

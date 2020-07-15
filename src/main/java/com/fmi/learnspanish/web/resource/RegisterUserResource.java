@@ -5,8 +5,6 @@ import java.util.Set;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
-import com.fmi.learnspanish.domain.MainLevel;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
