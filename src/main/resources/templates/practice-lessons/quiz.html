@@ -28,24 +28,22 @@
             <th:block th:include="~{_shared/sidebar}" />
 
             <div class="sidebar-content">
-                <div class="sidebar-content-header">
+                <div id="title" class="sidebar-content-header">
                     <h3>Choose correct answer</h3>
                 </div>
 
                 <div id="lessonContent" class="sidebar-content-body">
                     <p id="question" class="questionContent"></p>
 
-                    <div class="optionBox" id="option0"><span id="choice0"></span></div>
-                    <div class="optionBox" id="option1"><span id="choice1"></span></div>
-                    <div class="optionBox" id="option2"><span id="choice2"></span></div>
-                    <div class="optionBox" id="option3"><span id="choice3"></span></div>
+                    <div id="option0" class="optionBox"><span id="choice0"></span></div>
+                    <div id="option1" class="optionBox"><span id="choice1"></span></div>
+                    <div id="option2" class="optionBox"><span id="choice2"></span></div>
+                    <div id="option3" class="optionBox"><span id="choice3"></span></div>
 
                     <hr style="margin-top: 50px">
                     <footer>
                         <p id="progress">Question x of y</p>
                     </footer>
-
-
 
                 </div>
             </div>

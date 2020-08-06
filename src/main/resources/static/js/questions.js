@@ -94,6 +94,8 @@ function createQuiz(questionsFromDb, lessonNumber) {
             gameOverHTML += "<div class='btn float-right create_btn yellow_btn'><a id='tryAgainButton' href='/practice/lesson-" + lessonNumber + "'>Try again</a></div>";
         }
 
+        var title = document.getElementById("title");
+        title.innerHTML = "<h3>Results</h3>";
         var element = document.getElementById("lessonContent");
         element.innerHTML = gameOverHTML;
     };

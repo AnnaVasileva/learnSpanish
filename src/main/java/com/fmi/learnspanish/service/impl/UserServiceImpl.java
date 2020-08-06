@@ -1,3 +1,5 @@
+// All Rights Reserved, Copyright © Anna Vasileva 2020.
+
 package com.fmi.learnspanish.service.impl;
 
 import java.util.HashSet;
@@ -88,16 +90,6 @@ public class UserServiceImpl implements UserService {
 		log.info("User {} was successfully created.", user.getUsername());
 		return user;
 	}
-
-	// @Override
-	// public User checkUserExistence(String email) {
-	// User user = userRepository.findByEmail(email);
-	// if (Objects.isNull(user)) {
-	// throw new UserNotFoundException("Sorry, user not found.");
-	// }
-	// return user;
-	//
-	// }
 
 	@Override
 	public UserDetails loadUserByUsername(String username) {

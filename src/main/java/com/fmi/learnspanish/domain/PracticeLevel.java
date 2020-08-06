@@ -1,3 +1,5 @@
+// All Rights Reserved, Copyright © Anna Vasileva 2020.
+
 package com.fmi.learnspanish.domain;
 
 import java.util.Collection;
@@ -9,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;

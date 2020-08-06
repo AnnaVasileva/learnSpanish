@@ -1,3 +1,5 @@
+// All Rights Reserved, Copyright © Anna Vasileva 2020.
+
 package com.fmi.learnspanish.config;
 
 import com.fmi.learnspanish.service.UserService;
