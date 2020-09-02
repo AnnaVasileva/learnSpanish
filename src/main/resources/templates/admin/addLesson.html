@@ -1,0 +1,82 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Lesson</title>
+    <th:block th:include="~{_shared/head}" />
+    <link rel="stylesheet" type="text/css" href="/css/sidebar.css">
+    <link rel="stylesheet" type="text/css" href="/css/buttons.css">
+    <link rel="stylesheet" type="text/css" href="/css/addLesson.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet" />
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+</head>
+
+<body>
+
+    <div class="wrapper">
+        <th:block th:include="~{_shared/header}" />
+
+        <div class="container">
+            <div class="sidebar-content">
+                <div class="sidebar-content-header">
+                    <h3>Add Lesson</h3>
+                </div>
+                <div class="sidebar-content-body">
+                    <form enctype="multipart/form-data" id="myForm" th:action="@{/admin/addLesson}" method="POST">
+
+                        <div class="label-holder textCol d-flex">
+                            <label for="level" class="text-white">Choose Level</label>
+                        </div>
+                        <div id="radioLevelBtn">
+                            <input type="radio" id="beginner" name="level" value="beginner" checked="checked">
+                            <label id="beginnerBtn" for="level">Beginner</label>
+                            <input type="radio" id="intermediate" name="level" value="intermediate">
+                            <label for="level">Intermediate</label><br>
+                        </div>
+                        </br>
+
+                        <div class="label-holder textCol d-flex">
+                            <label for="lessonNumber" class="text-white">Lesson Number</label>
+                        </div>
+                        <div class="input-group form-group">
+                            <input type="text" class="form-control" id="lessonNumber" name="lessonNumber">
+                        </div>
+
+                        <div class="label-holder textCol d-flex">
+                            <label for="title" class="text-white">Lesson Title</label>
+                        </div>
+                        <div class="input-group form-group">
+                            <input type="text" class="form-control" id="title" name="title">
+                        </div>
+
+                        <div class="label-holder textCol d-flex">
+                            <label for="content" class="text-white">Lesson Content</label>
+                        </div>
+                        <div class="input-group form-group">
+                            <input type="file" class="form-control" id="content" name="content" accept=".txt">
+                        </div>
+
+                        <div class="button-container">
+                            <a href="/home"><span class="btn float-left cancel_btn">Cancel</span></a>
+                            <button id='linkButton' type="submit" class="btn float-right yellow_btn">Upload</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+
+        <th:block th:include="~{_shared/footer}" />
+    </div>
+</body>
+
+</html>

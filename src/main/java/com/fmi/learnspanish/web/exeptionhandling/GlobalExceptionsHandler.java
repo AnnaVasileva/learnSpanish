@@ -52,5 +52,13 @@ public class GlobalExceptionsHandler {
 		return modelAndView;
 	}
 	
+	@ExceptionHandler(LessonAlreadyExistsException.class)
+	public ModelAndView handleException(LessonAlreadyExistsException ex) {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setViewName("errors/errorLesson.html");
+		modelAndView.addObject(MESSAGE, ex.getMessage());
+		return modelAndView;
+	}
+	
 	
 }
