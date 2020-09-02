@@ -13,8 +13,9 @@
                         <a class="inactive active-home" href="/home">Home</a>
                         <a class="inactive active-learn" th:href="@{'/learn/grammar/' + ${session.email}}">Learn</a>
                         <a class="inactive active-profile" th:href="@{'/profile/' + ${session.email}}">[[${session.username}]]</a>
-                        <a class="inactive active-statistics" href="/admin/statistics">Statistics</a></li>
-                        <a class="inactive active-makeAdmin" href="/admin/makeAdmin">Make an admin</a>
+                        <a class="inactive active-addLesson" href="/admin/addLesson">Add Lesson</a>
+                        <a class="inactive active-statistics" href="/admin/statistics">Statistics</a>
+                        <a class="inactive active-makeAdmin" href="/admin/makeAdmin">Make Admin</a>
                         <a class="inactive active-about" href="/about">About Us</a>
                         <a class="inactive active-signOut" th:href="@{/logout}">Sign Out</a>
                     </th:block>

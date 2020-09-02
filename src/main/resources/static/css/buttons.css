@@ -30,3 +30,9 @@
     background-color: white;
     text-decoration: none;
 }
+
+#radioLevelBtn {
+    color: white;
+    margin-left: 0px;
+    text-align: left;
+}
