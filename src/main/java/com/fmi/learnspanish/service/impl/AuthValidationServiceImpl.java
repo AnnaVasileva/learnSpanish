@@ -13,6 +13,8 @@ import com.fmi.learnspanish.web.resource.RegisterUserResource;
 @Service
 public class AuthValidationServiceImpl implements AuthValidationService {
 
+	private static final int MIN_PASSWORD_LENGHT = 8;
+
 	@Autowired
 	private UserRepository userRepository;
 
@@ -22,11 +24,16 @@ public class AuthValidationServiceImpl implements AuthValidationService {
 		String confirmPassword = registerUserResource.getConfirmPassword();
 		String email = registerUserResource.getEmail();
 
-		if (!arePasswordsMatching(password, confirmPassword) || isAccountTaken(email)) {
-			throw new InvalidUserException("Invalid user. Please, try again.");
+		if (!isMinLenghtCovered(password) || !arePasswordsMatching(password, confirmPassword)
+				|| isAccountTaken(email)) {
+			throw new InvalidUserException("Somthing went wrong. Please, try again.");
 		}
-		
+
 		return true;
+	}
+
+	private boolean isMinLenghtCovered(String password) {
+		return password.length() >= MIN_PASSWORD_LENGHT;
 	}
 
 	private boolean arePasswordsMatching(String password, String confirmPassword) {
