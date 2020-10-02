@@ -40,6 +40,10 @@ input:focus {
     box-shadow: 0 0 0 0 !important;
 }
 
+input:invalid {
+    background-color: #FFAAAA;
+}
+
 .button-container {
     padding-top: 15px;
     margin-top: 5px;
