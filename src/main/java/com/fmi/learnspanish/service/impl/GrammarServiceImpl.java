@@ -105,7 +105,6 @@ public class GrammarServiceImpl implements GrammarService {
 		if (Objects.nonNull(nextLesson)) {
 			user.getGrammarLevel().setLevel(nextLessonNumber);
 			user.getGrammarLevel().setLesson(nextLesson);
-			//Those two should go in the if clause
 			userRepository.saveAndFlush(user);
 			sessionService.setSessionAttributes(session, user);
 		}
